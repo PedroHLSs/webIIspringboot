@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+</head>
+
+<body>
+    <header>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Acervo</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Sobre a Biblioteca</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Servicos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Acesse</a>
+            </li>
+        </ul>
+    </header>
+    <section class="section1">
+        <h2>Biblioteca Escolar - </h2>
+        <h2>Conhecimento para todos</h2>
+        <h3>Acesso gratuito a livros</h3>
+    </section>
+    <section class="section2">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <img th:src="@{/imagens/principe.jpg}" class="card-img" alt="Pequeno Príncipe">
+                            <h4>O Pequeno Príncipe Preto – Rodrigo França</h4>
+                            <p>Uma história cheia de encantamento que mostra um príncipe curioso, viajando por mundos
+                                mágicos e descobrindo a importância da amizade, do respeito e da diversidade. Um convite
+                                para sonhar e aprender valores importantes de um jeito divertido.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img th:src="@{/imagens/menino.jpg}" class="card-img" alt="Menino Maluquinho">
+                            <h4>O Menino Maluquinho – Ziraldo</h4>
+                            <p>Um dos meninos mais divertidos da literatura! Ele usa uma panela como chapéu e transforma
+                                qualquer dia em uma aventura cheia de risadas, brincadeiras e descobertas. Um livro
+                                alegre que fala sobre amizade, criatividade e infância.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img th:src="@{/imagens/narizinho.jpg}" class="card-img" alt="Narizinho Arrebitado">
+                            <h4>Reinações de Narizinho – Monteiro Lobato</h4>
+                            <p>Narizinho vive no Sítio do Picapau Amarelo e, junto com Emília e o Visconde, embarca em
+                                histórias cheias de fantasia e magia. Aqui, tudo é possível: bonecas falam, sabugos de
+                                milho viram sábios, e o mundo é um enorme convite à imaginação.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-md-3">
+                            <img th:src="@{/imagens/chapeu.jpg}" class="card-img" alt="Livro 1">
+                            <h4>Chapeuzinho Vermelho</h4>
+                            <p>Chapeuzinho é uma menina alegre que vai levar doces para a vovó. Mas no caminho encontra o Lobo Mau, que tem planos nada bons! Será que ela vai conseguir escapar e salvar a vovó? Uma aventura cheia de coragem e surpresas!</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img th:src="@{/imagens/pequenoprincipe.jpg}" class="card-img" alt="Livro 2">
+                            <h4>O pequeno principe</h4>
+                            <p>Um príncipe curioso vem de outro planeta e adora fazer amigos por onde passa. Ele aprende que o mais importante na vida é cuidar de quem a gente gosta e valorizar as coisas simples. Uma história encantada que ensina a ver o mundo com o coração.</p>
+                        </div>
+                        <div class="col-md-3">
+                            <img th:src="@{/imagens/jacare.jpg}" class="card-img" alt="Livro 3">
+                            <h4>Periogoso</h4>
+                            <p>Um crocodilo grandão gosta de colar etiquetas em tudo o que encontra: "fofo", "espinhoso", "macio". Mas quando ele conhece um coelho diferente, descobre que a amizade é muito mais importante do que rótulos. Uma história divertida que vai arrancar risadas!</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Próximo</span>
+            </button>
+        </div>
+    </section>
+    <section class="section3">
+        <h2>Recursos da Biblioteca</h2>
+        <h3>Descubra o que a biblioteca proporciona</h3>
+        <div class="container mt-4">
+            <div class="row justify-content-start">
+                <div class="col-md-4">
+                    <div class="card text-left p-3 custom-card h-100">
+                        <div class="mb-3">
+                            <img th:src="@{/imagens/like.png}" alt="Ícone Acervo" class="icon">
+                        </div>
+                        <h5 class="fw-bold text-primary">Empréstimos de livros</h5>
+                        <p class="text-muted">
+                            Histórias divertidas, contos clássicos e livros ilustrados para estimular o gosto pela
+                            leitura desde cedo.
+                        </p>
+                        <a href="#" class="btn custom-btn">Acesso</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-left p-3 custom-card h-100">
+                        <div class="mb-3">
+                            <img th:src="@{/imagens/broche.png}" alt="Ícone Acervo" class="icon">
+                        </div>
+                        <h5 class="fw-bold text-primary">Recomendações</h5>
+                        <p class="text-muted">
+                            Confira as
+                            recomendações diárias
+                        </p>
+                        <a href="#" class="btn custom-btn">Acesso</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card text-left p-3 custom-card h-100">
+                        <div class="mb-3">
+                            <img th:src="@{/imagens/ideia.png}" alt="Ícone Acervo" class="icon">
+                        </div>
+                        <h5 class="fw-bold text-primary">Valorização</h5>
+                        <p class="text-muted">
+                            Livros com lendas e
+                            histórias tradicionais
+                            brasileiras, valorizando
+                            a cultura local.
+                        </p>
+                        <a href="#" class="btn custom-btn">Acesso</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <br><br>
+    </footer>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+    crossorigin="anonymous"></script>
+
+</html>

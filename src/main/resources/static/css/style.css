@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    background-color: #017DC5;
+    padding: 1.1rem;
+    border-bottom: 2.1rem solid #015383;
+}
+header li{
+    font-size: 1.3rem;
+}
+header .nav-link {
+    color: white;
+}
+.section1 {
+    margin-left: 40px;
+    margin-top: 50px;
+}
+.section1 h2{
+    color: #03658C;
+    font-size: 3rem;
+}
+.section1 h3{
+    color: #0080CE;
+    font-size: 2.1rem;
+    margin: 100px 0 100px 0;
+}
+.section2{
+    background-color: #017DC5;
+}
+.carousel-item img {
+    border-radius: 12px; 
+    margin: 40px;
+}
+.section2 h4, p {
+    color: white;
+    text-align: center;
+}
+.section2 p{
+    margin-bottom: 80px;
+}
+.carousel-item .card-img{
+    height: 300px;
+    width: 250px;
+    margin: 80px auto;
+    object-fit: cover;
+    display: block;
+}
+.section3 h2{
+    color: #03658C;
+}
+.section3 h3{
+    color: #399CD5;
+}
+.section3 {
+    margin: 110px;
+}
+.custom-card {
+  border: 1px solid #0d6efd; 
+  border-radius: 15px;
+}
+
+.custom-btn {
+  border: 1px solid #0d6efd;
+  border-radius: 20px;
+  padding: 5px 20px;
+  color: #0d6efd;
+  background-color: white;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
+  transition: 0.3s;
+}
+.custom-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-card a {
+  margin-top: auto;
+}
+.custom-btn:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+.icon {
+    height: 80px;
+    width: 80px;
+    border-radius: 5px;
+    margin: 5px;
+    align-items: left;
+}
+footer {
+    background-color: #017DC5;
+    margin: none;
+    padding: 10px;
+    width: 100%;
+}
