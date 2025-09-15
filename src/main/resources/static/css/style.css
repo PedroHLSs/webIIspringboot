@@ -58,6 +58,12 @@ header .nav-link {
 .section3 {
     margin: 110px;
 }
+.section3 h5{
+    text-align: center ;
+}
+.section3 img{
+    margin: 0 auto;
+}
 .custom-card {
   border: 1px solid #0d6efd; 
   border-radius: 15px;
@@ -96,4 +102,9 @@ footer {
     margin: none;
     padding: 10px;
     width: 100%;
+}
+
+.section3 .card1{
+    display: flex;
+    justify-content: center;
 }
