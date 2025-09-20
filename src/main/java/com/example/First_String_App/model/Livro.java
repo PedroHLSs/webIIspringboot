@@ -1,6 +1,6 @@
 package com.example.First_String_App.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "livros")
 
-public class livroModel {
+public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,11 +21,13 @@ public class livroModel {
     @Column
     private String autor;
     @Column
-    private LocalDateTime ano;
+    private LocalDate ano;
     @Column
     private String editora;
     @Column
     private Boolean disponivel;
+    @Column
+    private String descricao;
     
     public Long getId() {
         return id;
@@ -45,10 +47,10 @@ public class livroModel {
     public void setAutor(String autor) {
         this.autor = autor;
     }
-    public LocalDateTime getAno() {
+    public LocalDate getAno() {
         return ano;
     }
-    public void setAno(LocalDateTime ano) {
+    public void setAno(LocalDate ano) {
         this.ano = ano;
     }
     public String getEditora() {
@@ -63,4 +65,11 @@ public class livroModel {
     public void setDisponivel(Boolean disponivel) {
         this.disponivel = disponivel;
     }
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
 }

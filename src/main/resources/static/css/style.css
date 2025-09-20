@@ -108,3 +108,22 @@ footer {
     display: flex;
     justify-content: center;
 }
+.cadastro{
+    background-color: #017DC5;
+    padding: 0.6rem;
+    border-bottom:2rem solid #015383;
+}
+.cadastro li{
+    font-size: 1.3rem;
+}
+.cadastro .nav-link {
+    color: white;
+}
+.titulo{
+    padding-bottom: 30px;
+}
+#botaoCadastro{
+    margin-top: 20px;
+}
+
+
