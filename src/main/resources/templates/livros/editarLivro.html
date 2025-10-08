@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head 
-th:replace="fragments/head :: head('Cadastrar Livro')">
+    th:replace="fragments/head :: head('Editar Livro')">
 </head>
 
 <body>
@@ -23,8 +23,10 @@ th:replace="fragments/head :: head('Cadastrar Livro')">
         </ul>
     </header>
     <div class="container pt-5">
-        <h1 class="titulo">Cadastrar Livro</h1>
+        <h1 class="titulo">Editar Produto</h1>
         <form action="#" th:action="@{/livros/salvarLivro}" th:object="${livro}" method="POST">
+            <input type="hidden" th:field="*{id}" />
+            
             <div class="form-group row">
                 <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
                 <div class="col-sm-10">
@@ -75,7 +77,7 @@ th:replace="fragments/head :: head('Cadastrar Livro')">
                         placeholder="Qual a descricao do livro?" rows="4" cols="50"></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-info col-2" id="botaoCadastro"> Cadastrar Livro</button>
+            <button type="submit" class="btn btn-info col-2" id="botaoCadastro"> Editar Livro</button>
         </form>
     </div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>

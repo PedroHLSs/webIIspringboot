@@ -124,6 +124,10 @@ footer {
 }
 #botaoCadastro{
     margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
 }
-
+.container{
+    margin-top: 20px;
+}
 
