@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.example.First_String_App.model.Livro;
 
-public interface livroService {
+public interface LivroService {
     List<Livro> listarLivros();
     Livro getLivroById(long id);
     Livro salvarLivro(Livro livro);

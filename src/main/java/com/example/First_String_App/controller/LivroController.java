@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.First_String_App.model.Livro;
-import com.example.First_String_App.service.livroService;
+import com.example.First_String_App.service.LivroService;
 
 
 @Controller
@@ -17,7 +17,7 @@ import com.example.First_String_App.service.livroService;
 public class LivroController {
 
     @Autowired
-    private livroService livroService;
+    private LivroService livroService;
 
     @GetMapping("/livros")
     public String index(Model model) {

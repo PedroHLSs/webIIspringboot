@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.First_String_App.model.Livro;
-import com.example.First_String_App.repository.livroRepository;
-import com.example.First_String_App.service.livroService;
+import com.example.First_String_App.repository.LivroRepository;
+import com.example.First_String_App.service.LivroService;
 
 @Service
-public class livroServiceImpl implements livroService {
+public class LivroServiceImpl implements LivroService {
 
     @Autowired
-    private livroRepository livroRepository;
+    private LivroRepository livroRepository;
 
     @Override
     public List<Livro> listarLivros() {

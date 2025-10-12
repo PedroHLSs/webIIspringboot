@@ -71,5 +71,18 @@ public class Livro {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    public Livro() {
+    }
+    public Livro(Long id, String titulo, String autor, LocalDate ano, String editora, Boolean disponivel,
+            String descricao) {
+        this.id = id;
+        this.titulo = titulo;
+        this.autor = autor;
+        this.ano = ano;
+        this.editora = editora;
+        this.disponivel = disponivel;
+        this.descricao = descricao;
+    }
+    
     
 }
