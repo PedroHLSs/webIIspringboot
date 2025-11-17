@@ -1,86 +1,78 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/dash.css}">
 
-<head 
-    th:replace="fragments/head :: head('Editar Livro')">
+<head th:replace="fragments/head :: head('Editar Livro')">
+
 </head>
 
 <body>
-    <header class="cadastro">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" th:href="@{/livros}">Voltar a Página Inicial</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Disabled</a>
-            </li>
-        </ul>
-    </header>
-    <div class="container pt-5">
-        <h1 class="titulo">Editar Produto</h1>
-        <form action="#" th:action="@{/livros/salvarLivro}" th:object="${livro}" method="POST">
-            <input type="hidden" th:field="*{id}" />
-            
-            <div class="form-group row">
-                <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{titulo}" class="form-control" id="titulo" name="titulo"
-                        placeholder="Digite o titulo do livro">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="autor">Autor:</label>
-                <div class="col-sm-10">
-                    <input type="text" id="autor" th:field="*{autor}" class="form-control" name="autor"
-                        placeholder="Quem é o autor do livro?">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="ano">Ano:</label>
-                <div class="col-sm-10">
-                    <input type="date" th:field="*{ano}" class="form-control" id="ano" name="ano" step="0.01"
-                        placeholder="Digite o ano do livro">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="editora">Editora:</label>
-                <div class="col-sm-10">
-                    <input type="text" th:field="*{editora}" class="form-control" id="editora" name="editora"
-                        placeholder="Qual a editora do livro?">
-                </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="disponivel">Disponivel?:</label>
-                <div class="col-sm-10">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" th:field="*{disponivel}" value="true"
-                            id="disponivelSim">
-                        <label class="form-check-label" for="disponivelSim">Sim</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" th:field="*{disponivel}" value="false"
-                            id="disponivelNao">
-                        <label class="form-check-label" for="disponivelNao">Não</label>
+    <div id="wrapper">
+        <div th:replace="fragments/dashboard :: sidebar"></div>
+        <div class="container pt-5">
+            <h1 class="titulo">Editar Produto</h1>
+            <form action="#" th:action="@{/livros/salvarLivro}" th:object="${livro}" method="POST">
+                <input type="hidden" th:field="*{id}" />
+                <div class="form-group row">
+                    <label for="titulo" class="col-sm-2 col-form-label">Titulo</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{titulo}" class="form-control" id="titulo" name="titulo"
+                            placeholder="Digite o titulo do livro">
                     </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label" for="descricao"> Descricao breve do livro:</label>
-                <div class="col-sm-10">
-                    <textarea th:field="*{descricao}" class="form-control" id="descricao" name="descricao"
-                        placeholder="Qual a descricao do livro?" rows="4" cols="50"></textarea>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="autor">Autor:</label>
+                    <div class="col-sm-10">
+                        <input type="text" id="autor" th:field="*{autor}" class="form-control" name="autor"
+                            placeholder="Quem é o autor do livro?">
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-info col-2" id="botaoCadastro"> Editar Livro</button>
-        </form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="ano">Ano:</label>
+                    <div class="col-sm-10">
+                        <input type="date" th:field="*{ano}" class="form-control" id="ano" name="ano" step="0.01"
+                            placeholder="Digite o ano do livro">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="editora">Editora:</label>
+                    <div class="col-sm-10">
+                        <input type="text" th:field="*{editora}" class="form-control" id="editora" name="editora"
+                            placeholder="Qual a editora do livro?">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="disponivel">Disponivel?:</label>
+                    <div class="col-sm-10">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{disponivel}" value="true"
+                                id="disponivelSim">
+                            <label class="form-check-label" for="disponivelSim">Sim</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" th:field="*{disponivel}" value="false"
+                                id="disponivelNao">
+                            <label class="form-check-label" for="disponivelNao">Não</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label" for="descricao"> Descricao breve do livro:</label>
+                    <div class="col-sm-10">
+                        <textarea th:field="*{descricao}" class="form-control" id="descricao" name="descricao"
+                            placeholder="Qual a descricao do livro?" rows="4" cols="50"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-info col-2" id="botaoCadastro"> Editar Livro</button>
+                <a th:href="@{/livros}"></a><button class="btn btn-info col-2">Voltar para a Listagem de Livros</button></a>
+            </form>
+        </div>
     </div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>

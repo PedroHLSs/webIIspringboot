@@ -23,6 +23,11 @@ public class UsuarioController {
         return "user/registro";
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "user/login";
+    }
+
     @PostMapping("/criarUsuario")
     public String criarUsuario(@ModelAttribute Usuario usuario, RedirectAttributes redirectAttributes) {
         Integer id = usuarioService.criarUsuario(usuario);

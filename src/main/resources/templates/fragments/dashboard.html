@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="dashboard-head">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/dash.css}">
+</head>
+
+<body>
+    <!-- Sidebar Fragment -->
+    <div th:fragment="sidebar" id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+            <li class="active">
+                <a th:href="@{/livros}"><span class="fa-stack fa-lg pull-left"><i
+                            class="fa fa-book fa-stack-1x "></i></span> Gerência de Livros</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa-stack fa-lg pull-left"><i
+                            class="fa fa-flag fa-stack-1x "></i></span>Gerência de Multas</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa-stack fa-lg pull-left"><i
+                            class="fa fa-cloud-download fa-stack-1x "></i></span>Gerência de Usuários</a>
+            </li>
+            <li>
+                <a href="#"> <span class="fa-stack fa-lg pull-left"><i
+                            class="fa fa-cart-plus fa-stack-1x "></i></span>Gerência de Emprestimos</a>
+            </li>
+            <li>
+                <a href="#"><span class="fa-stack fa-lg pull-left"><i
+                            class="fa fa-youtube-play fa-stack-1x "></i></span>Gerencia de Multas</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Dashboard Scripts Fragment -->
+    <div th:fragment="dashboard-scripts">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>
+            $("#menu-toggle").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+            $("#menu-toggle-2").click(function (e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled-2");
+                $('#menu ul').hide();
+            });
+        </script>
+    </div>
+
+</body>
+
+</html>

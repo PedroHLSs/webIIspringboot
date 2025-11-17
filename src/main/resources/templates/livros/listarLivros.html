@@ -1,50 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/dash.css}">
 
 <head th:replace="fragments/head :: head('Listar Livro')">
 
 </head>
 
 <body>
-    <div class="container">
-        <h1>Listagem de Produto</h1>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Autor</th>
-                    <th scope="col">Ano</th>
-                    <th scope="col">Editora</th>
-                    <th scope="col">Disponivel</th>
-                    <th scope="col">Descricao</th>
-                    <th scope="col">Excluir</th>
-                    <th scope="col">Editar</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="livro : ${listaLivros}">
-                    <td scope="row" th:text="${livro.titulo}"></td>
-                    <td scope="row" th:text="${livro.autor}"></td>
-                    <td scope="row" th:text="${livro.ano}"></td>
-                    <td scope="row" th:text="${livro.editora}"></td>
-                    <td scope="row" th:text="${livro.disponivel}"></td>
-                    <td scope="row" th:text="${livro.descricao}"></td>
-                    <td>
-                        <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}">Editar</a>
-                    </td>
-                    <td>
-                        <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}">Deletar</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="row">
-            <a th:href="@{/livros/cadastrarLivro}">
-                <button class="btn btn-primary">Cadastrar Livro</button>
-            </a>
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div th:replace="fragments/dashboard :: sidebar"></div>
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <h1>Listagem de Livros</h1>
+
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Titulo</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Ano</th>
+                            <th scope="col">Editora</th>
+                            <th scope="col">Disponivel</th>
+                            <th scope="col">Descricao</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="livro : ${listaLivros}">
+                            <td scope="row" th:text="${livro.titulo}"></td>
+                            <td scope="row" th:text="${livro.autor}"></td>
+                            <td scope="row" th:text="${livro.ano}"></td>
+                            <td scope="row" th:text="${livro.editora}"></td>
+                            <td scope="row" th:text="${livro.disponivel}"></td>
+                            <td scope="row" th:text="${livro.descricao}"></td>
+                            <td>
+                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}"
+                                    class="btn btn-sm btn-warning">Editar</a>
+                            </td>
+                            <td>
+                                <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}"
+                                    class="btn btn-sm btn-danger">Deletar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <a th:href="@{/livros/cadastrarLivro}">
+                        <button class="btn btn-primary">Cadastrar Livro</button>
+                    </a>
+                </div>
+            </div>
         </div>
+        <!-- /#page-content-wrapper -->
     </div>
+    <!-- /#wrapper -->
+
+    <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>

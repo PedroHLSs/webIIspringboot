@@ -29,10 +29,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
           .authorizeHttpRequests(auth -> auth
-              .requestMatchers("/", "/index.html", "/registro", "/criarUsuario", "/css/**", "/js/**", "/imagens/**").permitAll()
+              .requestMatchers("/", "/index.html", "/registro", "/criarUsuario", "/login", "/css/**", "/js/**", "/imagens/**").permitAll()
               .anyRequest().authenticated()
           )
-          .formLogin(form -> form.loginPage("/registro").permitAll())
+          .formLogin(form -> form
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+            .defaultSuccessUrl("/fragments/dashboard", true)
+            .failureUrl("/login?error")
+                .permitAll()
+          )
           .logout(logout -> logout.permitAll());
         return http.build();
     }
