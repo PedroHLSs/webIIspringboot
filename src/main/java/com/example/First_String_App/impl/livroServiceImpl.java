@@ -20,6 +20,15 @@ public class LivroServiceImpl implements LivroService {
     public List<Livro> listarLivros() {
         return livroRepository.findAll();
     }
+    @Override
+    public Livro buscarLivroPorId(Long id) {
+        Optional<Livro> livro = livroRepository.findById(id);
+        if (livro.isPresent()) {
+            return livro.get();
+        } else {
+            throw new RuntimeException("Livro não encontrado para o id: " + id);
+        }
+    }
 
     @Override
     public Livro salvarLivro(Livro livro) {

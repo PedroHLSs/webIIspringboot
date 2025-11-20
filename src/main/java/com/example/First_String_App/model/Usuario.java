@@ -81,7 +81,7 @@ public class Usuario {
         this.senha = senha;
         this.roles = roles;
     }
-
+    
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "roles", joinColumns = @JoinColumn(name = "id_usuario"))
     @Column(name = "user_role")

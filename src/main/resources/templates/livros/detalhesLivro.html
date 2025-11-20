@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/css/dash.css}">
+
+<head th:replace="fragments/head :: head('Detalhes do Livro')">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div th:replace="fragments/dashboard :: sidebar"></div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid pt-5">
+                <div class="row">
+                    <!-- Imagem do Livro -->
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-body text-center" style="min-height: 400px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+                                <img th:if="${livro.imagemUrl != null and !livro.imagemUrl.isEmpty()}" 
+                                     th:src="${livro.imagemUrl}" 
+                                     th:alt="${livro.titulo}" 
+                                     style="max-width: 100%; max-height: 400px;"
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"/>
+                                <div style="display: none; text-align: center;">
+                                    <i class="fa fa-book" style="font-size: 100px; color: #ccc;"></i>
+                                    <p style="color: #999; margin-top: 20px;">Imagem não disponível</p>
+                                </div>
+                                <div th:if="${livro.imagemUrl == null or livro.imagemUrl.isEmpty()}" style="text-align: center;">
+                                    <i class="fa fa-book" style="font-size: 100px; color: #ccc;"></i>
+                                    <p style="color: #999; margin-top: 20px;">Sem imagem</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informações do Livro -->
+                    <div class="col-md-8">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="info">Informações</h4>
+                            </div>
+                            <div class="panel-body">
+                                <p style="color: #000;"><strong>Autor:</strong> <span th:text="${livro.autor}">Robert C. Martin</span></p>
+                                <p style="color: #000;"><strong>Editora:</strong> <span th:text="${livro.editora}">Editora Exemplo</span></p>
+                                <p style="color: #000;"><strong>ISBN:</strong> <span th:text="${livro.isbn}">978-8576082675</span></p>
+                                <p style="color: #000;"><strong>Localização:</strong> <span th:text="${livro.localizacao}">Setor A - Prateleira 12</span></p>
+                                <p style="color: #000;"><strong>Status:</strong> 
+                                    <span th:if="${livro.disponivel}" class="label label-success">Disponível</span>
+                                    <span th:unless="${livro.disponivel}" class="label label-danger">Indisponível</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Descrição</h4>
+                            </div>
+                            <div class="panel-body">
+                                <p th:text="${livro.descricao}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default" style="background-color: #000; color: #fff;">
+                            <div class="panel-body text-center">
+                                <a th:href="@{/emprestimos/registrar/{id}(id=${livro.id})}" class="btn btn-lg" style="background-color: #000; color: #fff; width: 100%; border: none;">
+                                    <strong>Registrar Emprestimo</strong>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}" class="btn btn-warning">
+                                    <i class="fa fa-edit"></i> Editar
+                                </a>
+                                <a th:href="@{/livros}" class="btn btn-primary">
+                                    <i class="fa fa-arrow-left"></i> Voltar
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
+    <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+</body>
+
+</html>

@@ -5,7 +5,6 @@
 <link rel="stylesheet" th:href="@{/css/dash.css}">
 
 <head th:replace="fragments/head :: head('Listar Livro')">
-
 </head>
 
 <body>
@@ -23,34 +22,45 @@
                         <tr>
                             <th scope="col">Titulo</th>
                             <th scope="col">Autor</th>
-                            <th scope="col">Ano</th>
+                            <th scope="col">ISBN</th>
                             <th scope="col">Editora</th>
+                            <th scope="col">Localização</th>
                             <th scope="col">Disponivel</th>
-                            <th scope="col">Descricao</th>
+                            <th scope="col">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="livro : ${listaLivros}">
-                            <td scope="row" th:text="${livro.titulo}"></td>
+                            <td scope="row">
+                                <a th:href="@{/livros/detalhesLivro/{id}(id=${livro.id})}"
+                                    th:text="${livro.titulo}"></a>
+                            </td>
                             <td scope="row" th:text="${livro.autor}"></td>
-                            <td scope="row" th:text="${livro.ano}"></td>
+                            <td scope="row" th:text="${livro.isbn}"></td>
                             <td scope="row" th:text="${livro.editora}"></td>
-                            <td scope="row" th:text="${livro.disponivel}"></td>
-                            <td scope="row" th:text="${livro.descricao}"></td>
-                            <td>
-                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}"
-                                    class="btn btn-sm btn-warning">Editar</a>
+                            <td scope="row" th:text="${livro.localizacao}"></td>
+                            <td scope="row">
+                                <span th:if="${livro.disponivel}" class="label label-success">Disponível</span>
+                                <span th:unless="${livro.disponivel}" class="label label-danger">Indisponível</span>
                             </td>
                             <td>
+                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}"
+                                    class="btn btn-sm btn-warning">
+                                    <i class="fa fa-edit"></i> Editar
+                                </a>
                                 <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}"
-                                    class="btn btn-sm btn-danger">Deletar</a>
+                                    class="btn btn-sm btn-danger">
+                                    <i class="fa fa-trash"></i> Deletar
+                                </a>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="row">
                     <a th:href="@{/livros/cadastrarLivro}">
-                        <button class="btn btn-primary">Cadastrar Livro</button>
+                        <button class="btn btn-primary">
+                            <i class="fa fa-plus"></i> Cadastrar Livro
+                        </button>
                     </a>
                 </div>
             </div>
@@ -61,8 +71,6 @@
 
     <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 
 </html>

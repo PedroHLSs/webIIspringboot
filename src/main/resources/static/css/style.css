@@ -131,3 +131,8 @@ footer {
     margin-top: 20px;
 }
 
+div.panel-body p {
+    text-align: left;
+}
+
+

@@ -31,6 +31,12 @@ public class Livro {
     private Boolean disponivel;
     @Column
     private String descricao;
+    @Column
+    private String imagemUrl;
+    @Column
+    private String isbn;
+    @Column
+    private String localizacao;
 
     public Long getId() {
         return id;
@@ -88,11 +94,35 @@ public class Livro {
         this.descricao = descricao;
     }
 
+    public String getImagemUrl() {
+        return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+
     public Livro() {
     }
 
     public Livro(Long id, String titulo, String autor, LocalDate ano, String editora, Boolean disponivel,
-            String descricao) {
+            String descricao, String imagemUrl, String isbn, String localizacao) {
         this.id = id;
         this.titulo = titulo;
         this.autor = autor;
@@ -100,6 +130,9 @@ public class Livro {
         this.editora = editora;
         this.disponivel = disponivel;
         this.descricao = descricao;
+        this.imagemUrl = imagemUrl;
+        this.isbn = isbn;
+        this.localizacao = localizacao;
     }
 
 }

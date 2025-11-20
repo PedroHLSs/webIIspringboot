@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.First_String_App.model.Livro;
 import com.example.First_String_App.service.LivroService;
 
-
 @Controller
 
 public class LivroController {
@@ -31,11 +30,12 @@ public class LivroController {
         return "livros/cadastrarLivro";
     }
 
- @PostMapping("/livros/salvarLivro")
+    @PostMapping("/livros/salvarLivro")
     public String postMethodName(@ModelAttribute("livro") Livro livro) {
         livroService.salvarLivro(livro);
         return "redirect:/livros";
     }
+
     @GetMapping("/livros/deletarLivro/{id}")
     public String deletarLivro(@PathVariable("id") Long id) {
         this.livroService.deletarLivro(id);
@@ -47,6 +47,13 @@ public class LivroController {
         Livro livro = livroService.getLivroById(id);
         model.addAttribute("livro", livro);
         return "livros/editarLivro";
+    }
+
+    @GetMapping("/livros/detalhesLivro/{id}")
+    public String detalhesLivro(@PathVariable Long id, Model model) {
+        Livro livro = livroService.buscarLivroPorId(id); // buscar no banco
+        model.addAttribute("livro", livro); // envia o livro para a view
+        return "livros/detalhesLivro"; // nome da página HTML
     }
 
 }
