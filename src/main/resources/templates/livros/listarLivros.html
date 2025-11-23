@@ -9,10 +9,8 @@
 
 <body>
     <div id="wrapper">
-        <!-- Sidebar -->
         <div th:replace="fragments/dashboard :: sidebar"></div>
 
-        <!-- Page Content -->
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <h1>Listagem de Livros</h1>
@@ -31,10 +29,7 @@
                     </thead>
                     <tbody>
                         <tr th:each="livro : ${listaLivros}">
-                            <td scope="row">
-                                <a th:href="@{/livros/detalhesLivro/{id}(id=${livro.id})}"
-                                    th:text="${livro.titulo}"></a>
-                            </td>
+                            <td scope="row" th:text="${livro.titulo}"></td>
                             <td scope="row" th:text="${livro.autor}"></td>
                             <td scope="row" th:text="${livro.isbn}"></td>
                             <td scope="row" th:text="${livro.editora}"></td>
@@ -44,13 +39,15 @@
                                 <span th:unless="${livro.disponivel}" class="label label-danger">Indisponível</span>
                             </td>
                             <td>
-                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}"
-                                    class="btn btn-sm btn-warning">
+                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}" class="btn btn-sm btn-warning">
                                     <i class="fa fa-edit"></i> Editar
                                 </a>
-                                <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}"
-                                    class="btn btn-sm btn-danger">
+                                <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}" class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash"></i> Deletar
+                                </a>
+                                <a th:href="@{/livros/detalhesLivro/{id}(id=${livro.id})}"
+                                    class="btn btn-sm btn-primary">
+                                    <i class="fa fa-eye"></i> Detalhes
                                 </a>
                             </td>
                         </tr>
@@ -65,10 +62,7 @@
                 </div>
             </div>
         </div>
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
-
     <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
 </body>

@@ -28,6 +28,19 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     private BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    public Iterable<Usuario> listarUsuarios() {
+        return usuarioRepository.findAll();
+    }
+    @Override
+    public Usuario buscarPorId(Integer id) {
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        if (usuario.isPresent()) {
+            return usuario.get();
+        } else {
+            throw new RuntimeException("Usuário não encontrado para o id: " + id);
+        }
+    }
+    @Override
     public Integer criarUsuario(Usuario usuario) {
 
         String senha = usuario.getSenha();
