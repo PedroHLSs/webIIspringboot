@@ -29,13 +29,13 @@ public class EmprestimoController {
         this.emprestimoService = emprestimoService;
     }
 
-    @GetMapping("/emprestimos")
+    @GetMapping("/emprestimo")
     public String index(Model model) {
         model.addAttribute("listaEmprestimos", emprestimoService.listarEmprestimos());
         return "emprestimo/listarEmprestimos";
     }
 
-    @GetMapping("/emprestimos/cadastrarEmprestimo")
+    @GetMapping("/emprestimo/cadastrarEmprestimo")
     public String abrirFormCadastrar(@RequestParam(value = "id", required = false) Long id, Model model) {
         model.addAttribute("listaLivros", livroService.listarLivros());
         model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
@@ -49,7 +49,7 @@ public class EmprestimoController {
         return "emprestimo/cadastrarEmprestimo";
     }
 
-    @PostMapping("/emprestimos/salvarEmprestimo")
+    @PostMapping("/emprestimo/salvarEmprestimo")
     public String salvarEmprestimo(Emprestimo emprestimo) {
         if (emprestimo.getLivro() != null && emprestimo.getLivro().getId() != null) {
             Livro livro = livroService.buscarLivroPorId(emprestimo.getLivro().getId());
@@ -63,20 +63,25 @@ public class EmprestimoController {
         return "redirect:/emprestimo";
     }
 
-    @GetMapping("/emprestimos/deletarEmprestimo/{id}")
+    @GetMapping("/emprestimo/deletarEmprestimo/{id}")
     public String deletarEmprestimo(@PathVariable("id") Long id) {
         this.emprestimoService.deletarEmprestimo(id);
         return "redirect:/emprestimo";
     }
 
-    @GetMapping("/emprestimos/editarEmprestimo/{id}")
-    public String editarEmprestimo(@PathVariable("id") Long id, Model model) {
-        Emprestimo emprestimo = emprestimoService.getEmprestimoById(id);
+    @GetMapping("/emprestimo/editarEmprestimo/{id}")
+    public String abrirEditarEmprestimo(@PathVariable("id") Long id, Model model) {
+        Emprestimo emprestimo = emprestimoService.buscarEmprestimoPorId(id);
+        if (emprestimo == null) {
+            return "redirect:/emprestimo";
+        }
         model.addAttribute("emprestimo", emprestimo);
+        model.addAttribute("listaLivros", livroService.listarLivros());
+        model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
         return "emprestimo/editarEmprestimo";
     }
 
-    @GetMapping("/emprestimos/detalhesEmprestimo/{id}")
+    @GetMapping("/emprestimo/detalhesEmprestimo/{id}")
     public String detalhesEmprestimo(@PathVariable Long id, Model model) {
         Emprestimo emprestimo = emprestimoService.buscarEmprestimoPorId(id);
         model.addAttribute("emprestimo", emprestimo);

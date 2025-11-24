@@ -39,10 +39,10 @@
                                 <span th:if="${emprestimo.status} == false" class="label label-danger">Atrasado</span>
                             </td>
                             <td>
-                                <a th:href="@{/emprestimos/editar/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-warning">
+                                <a th:href="@{/emprestimo/editarEmprestimo/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-warning">
                                     <i class="fa fa-edit"></i> Editar
                                 </a>
-                                <a th:href="@{/emprestimos/deletar/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-danger">
+                                <a th:href="@{/emprestimo/deletarEmprestimo/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-danger">
                                     <i class="fa fa-trash"></i> Excluir
                                 </a>
                                 <a th:href="@{/emprestimos/detalhes/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-primary">
@@ -54,7 +54,7 @@
                 </table>
 
                 <div class="row">
-                    <a th:href="@{/emprestimos/cadastrarEmprestimo}">
+                    <a th:href="@{/emprestimo/cadastrarEmprestimo}">
                         <button class="btn btn-primary">
                             <i class="fa fa-plus"></i> Cadastrar Empréstimo
                         </button>
