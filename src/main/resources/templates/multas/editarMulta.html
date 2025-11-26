@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head('Editar Multa')">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div th:replace="fragments/dashboard :: sidebar"></div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid pt-5">
+                <h1 class="titulo">Editar Multa</h1>
+
+                <form th:action="@{/multas/salvarMulta}" th:object="${multa}" method="POST">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <!-- Empréstimo -->
+                    <div class="form-group row">
+                        <label for="emprestimo_id" class="col-sm-2 col-form-label">Empréstimo:</label>
+                        <div class="col-sm-10">
+                            <select th:field="*{emprestimo.id}" id="emprestimo_id" class="form-control" required>
+                                <option th:each="emp : ${listaEmprestimos}"
+                                        th:value="${emp.id}"
+                                        th:text="${emp.livro.titulo + ' - ' + emp.usuario.nome}">Livro - Usuário</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Usuário -->
+                    <div class="form-group row">
+                        <label for="usuario_id" class="col-sm-2 col-form-label">Usuário:</label>
+                        <div class="col-sm-10">
+                            <select th:field="*{usuario.id}" id="usuario_id" class="form-control" required>
+                                <option th:each="u : ${listaUsuarios}"
+                                        th:value="${u.id}"
+                                        th:text="${u.nome + ' - ' + u.email}">Nome - Email</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Valor -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="valor">Valor (R$):</label>
+                        <div class="col-sm-10">
+                            <input type="number" id="valor" th:field="*{valor}" class="form-control" step="0.01" min="0" required />
+                        </div>
+                    </div>
+
+                    <!-- Data da Multa -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="dataMulta">Data da Multa:</label>
+                        <div class="col-sm-10">
+                            <input type="date" id="dataMulta" th:field="*{dataMulta}" class="form-control" required />
+                        </div>
+                    </div>
+
+                    <!-- Motivo -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label" for="motivo">Motivo:</label>
+                        <div class="col-sm-10">
+                            <textarea id="motivo" th:field="*{motivo}" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Paga -->
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Situação:</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" th:field="*{paga}" value="false" /> Pendente
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" th:field="*{paga}" value="true" /> Paga
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-sm-10 col-sm-offset-2">
+                            <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Salvar Alterações</button>
+                            <a th:href="@{/multas}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Voltar</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
+    <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+</body>
+
+</html>

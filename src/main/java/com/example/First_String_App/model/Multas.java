@@ -1,6 +1,5 @@
 package com.example.First_String_App.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -8,9 +7,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "multas")
-public class Multas implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Multas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +16,10 @@ public class Multas implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "emprestimo_id", nullable = false)
     private Emprestimo emprestimo;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
 
     @Column(nullable = false)
     private BigDecimal valor;
@@ -33,6 +34,13 @@ public class Multas implements Serializable {
     private String motivo;
 
     public Multas() {
+    }
+    public Multas(Emprestimo emprestimo, BigDecimal valor, LocalDate dataMulta, Boolean paga, String motivo) {
+        this.emprestimo = emprestimo;
+        this.valor = valor;
+        this.dataMulta = dataMulta;
+        this.paga = paga;
+        this.motivo = motivo;
     }
 
     // Getters e Setters
@@ -82,5 +90,11 @@ public class Multas implements Serializable {
 
     public void setMotivo(String motivo) {
         this.motivo = motivo;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
