@@ -17,26 +17,28 @@
                 <form th:action="@{/emprestimo/salvarEmprestimo}" th:object="${emprestimo}" method="POST">
                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
+                    <!-- Livro -->
                     <div class="form-group row">
                         <label for="livro_id" class="col-sm-2 col-form-label">Livro:</label>
                         <div class="col-sm-10">
                             <select th:field="*{livro.id}" id="livro_id" class="form-control" required>
-                                <option th:if="${#lists.isEmpty(listaLivros)}" disabled selected>Nenhum livro cadastrado
-                                </option>
-                                <option th:each="livro : ${listaLivros}" th:value="${livro.id}"
-                                    th:text="${livro.titulo + ' - ' + livro.autor}">Título - Autor</option>
+                                <option value="" disabled selected>Selecione um livro</option>
+                                <option th:each="livro : ${listaLivros}"
+                                        th:value="${livro.id}"
+                                        th:text="${livro.titulo}">Título do Livro</option>
                             </select>
                         </div>
                     </div>
+
+                    <!-- Usuário -->
                     <div class="form-group row">
                         <label for="usuario_id" class="col-sm-2 col-form-label">Usuário:</label>
                         <div class="col-sm-10">
                             <select th:field="*{usuario.id}" id="usuario_id" class="form-control" required>
-                                <option th:if="${#lists.isEmpty(listaUsuarios)}" disabled selected>Nenhum usuário
-                                    cadastrado
-                                </option>
-                                <option th:each="usuario : ${listaUsuarios}" th:value="${usuario.id}"
-                                    th:text="${usuario.nome + ' - ' + usuario.email}">Nome - Email</option>
+                                <option value="" disabled selected>Selecione um usuário</option>
+                                <option th:each="u : ${listaUsuarios}"
+                                        th:value="${u.id}"
+                                        th:text="${u.nome}">Nome do Usuário</option>
                             </select>
                         </div>
                     </div>

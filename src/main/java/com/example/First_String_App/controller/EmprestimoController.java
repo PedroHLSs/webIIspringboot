@@ -80,11 +80,4 @@ public class EmprestimoController {
         model.addAttribute("listaUsuarios", usuarioService.listarUsuarios());
         return "emprestimo/editarEmprestimo";
     }
-
-    @GetMapping("/emprestimo/detalhesEmprestimo/{id}")
-    public String detalhesEmprestimo(@PathVariable Long id, Model model) {
-        Emprestimo emprestimo = emprestimoService.buscarEmprestimoPorId(id);
-        model.addAttribute("emprestimo", emprestimo);
-        return "emprestimo/detalhesEmprestimo";
-    }
 }

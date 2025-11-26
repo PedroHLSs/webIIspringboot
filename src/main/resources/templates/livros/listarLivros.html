@@ -30,7 +30,15 @@
                     <tbody>
                         <tr th:each="livro : ${listaLivros}">
                             <td scope="row" th:text="${livro.titulo}"></td>
-                            <td scope="row" th:text="${livro.autor}"></td>
+                            <td scope="row">
+                                <span th:if="${livro.autores != null and !livro.autores.isEmpty()}">
+                                    <span th:each="la, iterStat : ${livro.autores}">
+                                        <span th:text="${la.autor.nome}"></span>
+                                        <span th:if="${!iterStat.last}">, </span>
+                                    </span>
+                                </span>
+                                <span th:if="${livro.autores == null or livro.autores.isEmpty()}">—</span>
+                            </td>
                             <td scope="row" th:text="${livro.isbn}"></td>
                             <td scope="row" th:text="${livro.editora}"></td>
                             <td scope="row" th:text="${livro.localizacao}"></td>

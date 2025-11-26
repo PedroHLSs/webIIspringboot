@@ -1,12 +1,16 @@
 package com.example.First_String_App.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 
@@ -22,8 +26,6 @@ public class Livro {
     @Column(name = "name", nullable = false)
     private String titulo;
     @Column
-    private String autor;
-    @Column
     private LocalDate ano;
     @Column
     private String editora;
@@ -37,6 +39,9 @@ public class Livro {
     private String isbn;
     @Column
     private String localizacao;
+
+    @OneToMany(mappedBy = "livro", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LivroAutor> autores = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -52,14 +57,6 @@ public class Livro {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
     }
 
     public LocalDate getAno() {
@@ -118,14 +115,21 @@ public class Livro {
         this.localizacao = localizacao;
     }
 
+    public List<LivroAutor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<LivroAutor> autores) {
+        this.autores = autores;
+    }
+
     public Livro() {
     }
 
-    public Livro(Long id, String titulo, String autor, LocalDate ano, String editora, Boolean disponivel,
+    public Livro(Long id, String titulo, LocalDate ano, String editora, Boolean disponivel,
             String descricao, String imagemUrl, String isbn, String localizacao) {
         this.id = id;
         this.titulo = titulo;
-        this.autor = autor;
         this.ano = ano;
         this.editora = editora;
         this.disponivel = disponivel;

@@ -41,7 +41,15 @@
                                 <h4 class="info">Informações</h4>
                             </div>
                             <div class="panel-body">
-                                <p style="color: #000;"><strong>Autor:</strong> <span th:text="${livro.autor}">Robert C. Martin</span></p>
+                                <p style="color: #000;"><strong>Autor(es):</strong>
+                                    <span th:if="${livro.autores != null and !livro.autores.isEmpty()}">
+                                        <span th:each="la, iterStat : ${livro.autores}">
+                                            <span th:text="${la.autor.nome}"></span>
+                                            <span th:if="${!iterStat.last}">, </span>
+                                        </span>
+                                    </span>
+                                    <span th:if="${livro.autores == null or livro.autores.isEmpty()}">Nenhum autor cadastrado</span>
+                                </p>
                                 <p style="color: #000;"><strong>Editora:</strong> <span th:text="${livro.editora}">Editora Exemplo</span></p>
                                 <p style="color: #000;"><strong>ISBN:</strong> <span th:text="${livro.isbn}">978-8576082675</span></p>
                                 <p style="color: #000;"><strong>Localização:</strong> <span th:text="${livro.localizacao}">Setor A - Prateleira 12</span></p>
