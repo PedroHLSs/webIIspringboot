@@ -1,138 +1,74 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-header {
+.bg-light-blue {
+    background-color: #f0f8ff; 
+}
+
+.custom-card-cadastro {
+    max-width: 450px; 
+    border: 2px solid #017DC5; 
+    border-radius: 15px; 
+    background-color: white; 
+    padding: 30px;
+}
+
+.titulo-cadastro {
+    color: #03658C; 
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.form-label {
+    color: #03658C; 
+    font-weight: 500;
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+#btnCadastrar {
+    border: 1px solid #0d6efd;
+    border-radius: 20px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #0d6efd; 
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transition: 0.3s;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+#btnCadastrar:hover {
+    background-color: #017DC5; 
+    border-color: #017DC5;
+}
+
+.btn-outline-primary {
+    color: #0d6efd;
+    border-color: #0d6efd; 
+    border-radius: 0; 
+}
+
+.btn-check:checked + .btn-outline-primary {
     background-color: #017DC5;
-    padding: 1.1rem;
-    border-bottom: 2.1rem solid #015383;
-}
-header li{
-    font-size: 1.3rem;
-}
-header .nav-link {
+    border-color: #017DC5;
     color: white;
 }
-.section1 {
-    margin-left: 40px;
-    margin-top: 50px;
+
+#btnEntrar {
+    color: #0d6efd !important;
+    font-weight: 500;
 }
-.section1 h2{
-    color: #03658C;
-    font-size: 3rem;
-}
-.section1 h3{
-    color: #0080CE;
-    font-size: 2.1rem;
-    margin: 100px 0 100px 0;
-}
-.section2{
-    background-color: #017DC5;
-}
-.carousel-item img {
-    border-radius: 12px; 
-    margin: 40px;
-}
-.section2 h4, p {
-    color: white;
-    text-align: center;
-}
-.section2 p{
-    margin-bottom: 80px;
-}
-.carousel-item .card-img{
-    height: 300px;
-    width: 250px;
-    margin: 80px auto;
-    object-fit: cover;
-    display: block;
-}
-.section3 h2{
-    color: #03658C;
-}
-.section3 h3{
-    color: #399CD5;
-}
-.section3 {
-    margin: 110px;
-}
-.section3 h5{
-    text-align: center ;
-}
-.section3 img{
-    margin: 0 auto;
-}
-.custom-card {
-  border: 1px solid #0d6efd; 
-  border-radius: 15px;
+#btnEntrar:hover {
+    text-decoration: underline !important;
 }
 
-.custom-btn {
-  border: 1px solid #0d6efd;
-  border-radius: 20px;
-  padding: 5px 20px;
-  color: #0d6efd;
-  background-color: white;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
-  transition: 0.3s;
+.section-login, .section-registro, .section-acesso-negado {
+    min-height: calc(100vh - 120px); /* Ajuste a altura conforme o tamanho do seu header/footer */
+    padding: 2rem 0;
 }
-.custom-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.custom-card a {
-  margin-top: auto;
-}
-.custom-btn:hover {
-  background-color: #0d6efd;
-  color: white;
-}
-.icon {
-    height: 80px;
-    width: 80px;
-    border-radius: 5px;
-    margin: 5px;
-    align-items: left;
-}
-footer {
-    background-color: #017DC5;
-    margin: none;
-    padding: 10px;
-    width: 100%;
-}
-
-.section3 .card1{
-    display: flex;
-    justify-content: center;
-}
-.cadastro{
-    background-color: #017DC5;
-    padding: 0.6rem;
-    border-bottom:2rem solid #015383;
-}
-.cadastro li{
-    font-size: 1.3rem;
-}
-.cadastro .nav-link {
-    color: white;
-}
-.titulo{
-    padding-bottom: 30px;
-}
-#botaoCadastro{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-}
-.container{
-    margin-top: 20px;
-}
-
-div.panel-body p {
-    text-align: left;
-}
-
-

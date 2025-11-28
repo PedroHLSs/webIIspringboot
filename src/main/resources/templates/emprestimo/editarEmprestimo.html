@@ -17,8 +17,11 @@
                         <label for="livro_id" class="col-sm-2 col-form-label">Livro:</label>
                         <div class="col-sm-10">
                             <select th:field="*{livro.id}" id="livro_id" class="form-control" required>
-                                <option th:each="livro : ${listaLivros}" th:value="${livro.id}"
-                                    th:text="${livro.titulo + ' - ' + livro.autor}">Título - Autor</option>
+                                <option th:each="livro : ${listaLivros}"
+                                    th:value="${livro.id}"
+                                    th:text="${livro.titulo}"
+                                    th:selected="${livro.id == emprestimo.livro.id}">
+</option>
                             </select>
                         </div>
                     </div>
