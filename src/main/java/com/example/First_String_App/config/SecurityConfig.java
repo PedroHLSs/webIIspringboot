@@ -30,16 +30,35 @@ public class SecurityConfig {
         http
           .authorizeHttpRequests(auth -> auth
               .requestMatchers("/", "/index.html", "/registro", "/criarUsuario", "/login", "/css/**", "/js/**", "/imagens/**").permitAll()
+              
+              // Admin - Acesso total
+              .requestMatchers("/usuarios/**").hasAuthority("Admin")
+              
+              // Alunos - Acesso limitado
+              .requestMatchers("/livros").hasAnyAuthority("Aluno", "Professor", "Admin")
+              .requestMatchers("/livros/detalhesLivro/**").hasAnyAuthority("Aluno", "Professor", "Admin")
+              .requestMatchers("/livros/**").hasAnyAuthority("Professor", "Admin")
+              .requestMatchers("/emprestimo", "/emprestimo/cadastrarEmprestimo", "/emprestimo/salvarEmprestimo").hasAnyAuthority("Aluno", "Professor", "Admin")
+              .requestMatchers("/emprestimo/**").hasAnyAuthority("Professor", "Admin")
+              .requestMatchers("/multas").hasAnyAuthority("Aluno", "Professor", "Admin")
+              .requestMatchers("/multas/**").hasAnyAuthority("Professor", "Admin")
+              
+              // Professores e Admin
+              .requestMatchers("/autores/**").hasAnyAuthority("Professor", "Admin")
+              
               .anyRequest().authenticated()
           )
           .formLogin(form -> form
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-            .defaultSuccessUrl("/fragments/dashboard", true)
+            .defaultSuccessUrl("/livros", true)
             .failureUrl("/login?error")
                 .permitAll()
           )
-          .logout(logout -> logout.permitAll());
+          .logout(logout -> logout.permitAll())
+          .exceptionHandling(exception -> exception
+              .accessDeniedPage("/acessoNegado")
+          );
         return http.build();
     }
     @Bean

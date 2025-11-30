@@ -40,6 +40,17 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
             throw new RuntimeException("Usuário não encontrado para o id: " + id);
         }
     }
+    
+    @Override
+    public Usuario buscarPorEmail(String email) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        if (usuario.isPresent()) {
+            return usuario.get();
+        } else {
+            throw new RuntimeException("Usuário não encontrado para o email: " + email);
+        }
+    }
+    
     @Override
     public Integer criarUsuario(Usuario usuario) {
 
@@ -74,5 +85,27 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
         }
 
         return springUser;
+    }
+
+    @Override
+    public void atualizarUsuario(Usuario usuario) {
+        Usuario usuarioExistente = buscarPorId(usuario.getId());
+        usuarioExistente.setNome(usuario.getNome());
+        usuarioExistente.setEmail(usuario.getEmail());
+        usuarioExistente.setRoles(usuario.getRoles());
+        usuarioRepository.save(usuarioExistente);
+    }
+
+    @Override
+    public void deletarUsuario(Integer id) {
+        usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public void atualizarSenha(Integer id, String novaSenha) {
+        Usuario usuario = buscarPorId(id);
+        String senhaCriptografada = passwordEncoder.encode(novaSenha);
+        usuario.setSenha(senhaCriptografada);
+        usuarioRepository.save(usuario);
     }
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:fragment="dashboard-head">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -12,32 +13,41 @@
 <body>
     <div th:fragment="sidebar" id="sidebar-wrapper" class="d-flex flex-column custom-sidebar">
         <div class="sidebar-header p-3 text-center">
-            <h5 class="text-white">📚 Admin - Biblioteca</h5>
+            <h5 class="text-white">📚 Biblioteca</h5>
         </div>
         <ul class="nav flex-column sidebar-nav p-0 w-100">
+            <!-- Livros - Todos podem ver -->
             <li class="nav-item">
                 <a th:href="@{/livros}" class="nav-link active">
                     <i class="fas fa-book-open me-2"></i> Gerência de Livros
                 </a>
             </li>
-            <li class="nav-item">
-                <a th:href="@{/multas}" class="nav-link">
-                    <i class="fas fa-hand-holding-dollar me-2"></i> Gerência de Multas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="fas fa-users-gear me-2"></i> Gerência de Usuários
-                </a>
-            </li>
+            
+            <!-- Empréstimos - Todos podem ver -->
             <li class="nav-item">
                 <a th:href="@{/emprestimo}" class="nav-link">
                     <i class="fas fa-cart-plus me-2"></i> Gerência de Empréstimos
                 </a>
             </li>
+            
+            <!-- Multas - Todos podem ver (Aluno vê apenas suas multas) -->
             <li class="nav-item">
+                <a th:href="@{/multas}" class="nav-link">
+                    <i class="fas fa-hand-holding-dollar me-2"></i> Gerência de Multas
+                </a>
+            </li>
+            
+            <!-- Autores - Apenas Professor e Admin -->
+            <li class="nav-item" sec:authorize="hasAnyAuthority('Professor', 'Admin')">
                 <a th:href="@{/autores}" class="nav-link">
                     <i class="fas fa-pen-to-square me-2"></i> Autores
+                </a>
+            </li>
+            
+            <!-- Usuários - Apenas Admin -->
+            <li class="nav-item" sec:authorize="hasAuthority('Admin')">
+                <a th:href="@{/usuarios}" class="nav-link">
+                    <i class="fas fa-users-gear me-2"></i> Gerência de Usuários
                 </a>
             </li>
         </ul>

@@ -6,6 +6,10 @@ public interface UsuarioService {
     
     public Integer criarUsuario(Usuario usuario);
     public Usuario buscarPorId(Integer id);
+    public Usuario buscarPorEmail(String email);
     public Iterable<Usuario> listarUsuarios();
+    public void atualizarUsuario(Usuario usuario);
+    public void deletarUsuario(Integer id);
+    public void atualizarSenha(Integer id, String novaSenha);
     
 }

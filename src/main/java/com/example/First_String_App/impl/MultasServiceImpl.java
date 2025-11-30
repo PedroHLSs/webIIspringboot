@@ -22,6 +22,11 @@ public class MultasServiceImpl implements MultaService {
     }
 
     @Override
+    public List<Multas> listarMultasPorUsuario(Integer usuarioId) {
+        return multasRepository.findByUsuario_Id(usuarioId);
+    }
+
+    @Override
     public Multas buscarMultaPorId(Long id) {
         Optional<Multas> multa = multasRepository.findById(id);
         if (multa.isPresent()) {

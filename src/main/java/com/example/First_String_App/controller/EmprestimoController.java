@@ -2,6 +2,8 @@ package com.example.First_String_App.controller;
 
 import java.time.LocalDate;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,8 +32,23 @@ public class EmprestimoController {
     }
 
     @GetMapping("/emprestimo")
-    public String index(Model model) {
-        model.addAttribute("listaEmprestimos", emprestimoService.listarEmprestimos());
+    public String index(Model model, Authentication authentication) {
+        // Check if user is Aluno
+        if (authentication != null && 
+            authentication.getAuthorities().contains(new SimpleGrantedAuthority("Aluno"))) {
+            // Filter emprestimos by logged-in user
+            String email = authentication.getName();
+            Usuario usuario = usuarioService.buscarPorEmail(email);
+            if (usuario != null) {
+                model.addAttribute("listaEmprestimos", 
+                    emprestimoService.listarEmprestimosPorUsuario(usuario.getId()));
+            } else {
+                model.addAttribute("listaEmprestimos", emprestimoService.listarEmprestimos());
+            }
+        } else {
+            // Admin or Professor sees all
+            model.addAttribute("listaEmprestimos", emprestimoService.listarEmprestimos());
+        }
         return "emprestimo/listarEmprestimos";
     }
 

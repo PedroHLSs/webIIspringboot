@@ -8,6 +8,8 @@ public interface EmprestimoService {
 
     List<Emprestimo> listarEmprestimos();
 
+    List<Emprestimo> listarEmprestimosPorUsuario(Integer usuarioId);
+
     Emprestimo buscarEmprestimoPorId(Long id);
 
     Emprestimo getEmprestimoById(Long id);

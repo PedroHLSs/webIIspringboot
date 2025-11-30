@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="fragments/head :: head('Listar Usuários')">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div th:replace="fragments/dashboard :: sidebar"></div>
+
+        <div id="page-content-wrapper">
+            <div class="container-fluid p-4">
+                <h1 class="page-title mb-4">Listagem de Usuários</h1>
+                
+                <div th:if="${mensagem}" class="alert alert-success alert-dismissible fade show" role="alert">
+                    <span th:text="${mensagem}"></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                
+                <div class="table-responsive custom-table-container shadow-sm">
+                    <table class="table table-hover align-middle custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Roles</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="usuario : ${listaUsuarios}">
+                                <td th:text="${usuario.id}"></td>
+                                <td th:text="${usuario.nome}"></td>
+                                <td th:text="${usuario.email}"></td>
+                                <td>
+                                    <span th:if="${usuario.roles != null and !usuario.roles.isEmpty()}">
+                                        <span th:each="role, iterStat : ${usuario.roles}">
+                                            <span class="badge bg-primary" th:text="${role}"></span>
+                                            <span th:if="${!iterStat.last}"> </span>
+                                        </span>
+                                    </span>
+                                    <span th:if="${usuario.roles == null or usuario.roles.isEmpty()}">—</span>
+                                </td>
+                                <td class="text-center text-nowrap">
+                                    <a th:href="@{/usuarios/editarUsuario/{id}(id=${usuario.id})}" 
+                                        class="btn btn-sm btn-action btn-warning" title="Editar"
+                                        sec:authorize="hasAuthority('Admin')">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="@{/usuarios/deletarUsuario/{id}(id=${usuario.id})}" 
+                                        class="btn btn-sm btn-action btn-danger" 
+                                        onclick="return confirm('Tem certeza que deseja excluir este usuário?');"
+                                        title="Deletar"
+                                        sec:authorize="hasAuthority('Admin')">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row mt-4" sec:authorize="hasAuthority('Admin')">
+                    <div class="col-12">
+                        <a th:href="@{/registro}" class="btn custom-btn-primary">
+                            <i class="fas fa-plus me-2"></i> Cadastrar Novo Usuário
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
+    <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+</body>
+
+</html>

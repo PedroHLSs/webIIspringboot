@@ -24,6 +24,11 @@ public class EmprestimoServiceImpl implements EmprestimoService {
     }
 
     @Override
+    public List<Emprestimo> listarEmprestimosPorUsuario(Integer usuarioId) {
+        return emprestimoRepository.findByUsuario_Id(usuarioId);
+    }
+
+    @Override
     public Emprestimo buscarEmprestimoPorId(Long id) {
         Optional<Emprestimo> emprestimo = emprestimoRepository.findById(id);
         if (emprestimo.isPresent()) {

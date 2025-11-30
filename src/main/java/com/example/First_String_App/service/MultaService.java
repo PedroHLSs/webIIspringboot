@@ -8,6 +8,8 @@ public interface MultaService {
 
     List<Multas> listarMultas();
 
+    List<Multas> listarMultasPorUsuario(Integer usuarioId);
+
     Multas buscarMultaPorId(Long id);
 
     Multas getMultaById(Long id);

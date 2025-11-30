@@ -45,13 +45,15 @@
                                 
                                 <td class="text-center text-nowrap">
                                     <a th:href="@{/multas/editarMulta/{id}(id=${multa.id})}" 
-                                        class="btn btn-sm btn-action btn-warning" title="Editar">
+                                        class="btn btn-sm btn-action btn-warning" title="Editar"
+                                        sec:authorize="hasAnyAuthority('Professor', 'Admin')">
                                         <i class="fas fa-edit"></i> 
                                     </a>
                                     <a th:href="@{/multas/deletarMulta/{id}(id=${multa.id})}" 
                                         class="btn btn-sm btn-action btn-danger" 
                                         onclick="return confirm('Tem certeza que deseja excluir esta multa?');"
-                                        title="Deletar">
+                                        title="Deletar"
+                                        sec:authorize="hasAnyAuthority('Professor', 'Admin')">
                                         <i class="fas fa-trash-alt"></i> 
                                     </a>
                                 </td>
@@ -62,7 +64,8 @@
                 
                 <div class="row mt-4">
                     <div class="col-12">
-                        <a th:href="@{/multas/cadastrarMulta}" class="btn custom-btn-primary">
+                        <a th:href="@{/multas/cadastrarMulta}" class="btn custom-btn-primary"
+                           sec:authorize="hasAnyAuthority('Professor', 'Admin')">
                             <i class="fas fa-plus me-2"></i> Cadastrar Nova Multa
                         </a>
                     </div>

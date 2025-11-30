@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/head :: head('Listar Empréstimos')">
 </head>
@@ -43,13 +44,15 @@
                                 
                                 <td class="text-center text-nowrap">
                                     <a th:href="@{/emprestimo/editarEmprestimo/{id}(id=${emprestimo.id})}" 
-                                        class="btn btn-sm btn-action btn-warning" title="Editar">
+                                        class="btn btn-sm btn-action btn-warning" title="Editar"
+                                        sec:authorize="hasAnyAuthority('Professor', 'Admin')">
                                         <i class="fas fa-edit"></i> 
                                     </a>
                                     <a th:href="@{/emprestimo/deletarEmprestimo/{id}(id=${emprestimo.id})}" 
                                         class="btn btn-sm btn-action btn-danger" 
                                         onclick="return confirm('Tem certeza que deseja excluir este empréstimo?');"
-                                        title="Deletar">
+                                        title="Deletar"
+                                        sec:authorize="hasAnyAuthority('Professor', 'Admin')">
                                         <i class="fas fa-trash-alt"></i> 
                                     </a>
                                 </td>
