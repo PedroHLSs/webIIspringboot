@@ -1,99 +1,120 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/head :: head('Editar Emprestimo')">
+<head th:replace="fragments/head :: head('Editar Empréstimo')">
 </head>
 
 <body>
     <div id="wrapper">
         <div th:replace="fragments/dashboard :: sidebar"></div>
         <div id="page-content-wrapper">
-            <div class="container-fluid pt-5">
-                <h1 class="titulo">Editar Empréstimo</h1>
+            <div class="container-fluid p-4">
+                
+                <h1 class="page-title mb-4"><i class="fas fa-edit me-2"></i> Editar Empréstimo: <span class="text-secondary" th:text="'#' + ${emprestimo.id}"></span></h1>
 
-                <form th:action="@{/emprestimo/salvarEmprestimo}" th:object="${emprestimo}" method="POST">
-                    <input type="hidden" th:field="*{id}" />
-                    <div class="form-group row">
-                        <label for="livro_id" class="col-sm-2 col-form-label">Livro:</label>
-                        <div class="col-sm-10">
-                            <select th:field="*{livro.id}" id="livro_id" class="form-control" required>
-                                <option th:each="livro : ${listaLivros}"
-                                    th:value="${livro.id}"
-                                    th:text="${livro.titulo}"
-                                    th:selected="${livro.id == emprestimo.livro.id}">
-</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="usuario_id" class="col-sm-2 col-form-label">Usuário:</label>
-                        <div class="col-sm-10">
-                            <select id="usuario_id" th:field="*{usuario.id}" class="form-control" required>
-                                <option th:each="u : ${listaUsuarios}"
-                                    th:value="${u.id}"
-                                    th:text="${u.nome + ' - ' + u.email}">Nome - Email</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="dataEmprestimo">Data de Empréstimo:</label>
-                        <div class="col-sm-10">
-                            <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="dataPrevistaDevolucao">Data prevista
-                            devolução:</label>
-                        <div class="col-sm-10">
-                            <input type="date" id="dataPrevistaDevolucao" th:field="*{dataPrevistaDevolucao}"
-                                class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="dataDevolucao">Data de devolução:</label>
-                        <div class="col-sm-10">
-                            <input type="date" id="dataDevolucao" th:field="*{dataDevolucao}" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Situação:</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" th:field="*{status}" value="true" checked /> Em dia
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" th:field="*{status}" value="false" /> Atrasado
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="observacoes">Observações:</label>
-                        <div class="col-sm-10">
-                            <input type="text" id="observacoes" th:field="*{observacoes}" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Renovado?</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" th:field="*{renovado}" value="true" /> Sim
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" th:field="*{renovado}" value="false" /> Não
-                            </label>
-                        </div>
-                    </div>
+                <div class="p-4 custom-form-card shadow-lg">
+                    <form th:action="@{/emprestimo/salvarEmprestimo}" th:object="${emprestimo}" method="POST">
+                        
+                        <input type="hidden" th:field="*{id}" />
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-                    <div class="form-group row">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Editar
-                                Empréstimo</button>
-                            <a th:href="@{/emprestimo}" class="btn btn-default"><i class="fa fa-arrow-left"></i>
-                                Voltar</a>
+                        <div class="mb-3 row">
+                            <label for="livro_id" class="col-md-2 col-form-label form-label-custom">Livro:</label>
+                            <div class="col-md-10">
+                                <select th:field="*{livro.id}" id="livro_id" class="form-select form-control-custom" required>
+                                    <option th:each="livro : ${listaLivros}"
+                                        th:value="${livro.id}"
+                                        th:text="${livro.titulo}"
+                                        th:selected="${livro.id == emprestimo.livro.id}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                </form>
 
+                        <div class="mb-3 row">
+                            <label for="usuario_id" class="col-md-2 col-form-label form-label-custom">Usuário:</label>
+                            <div class="col-md-10">
+                                <select id="usuario_id" th:field="*{usuario.id}" class="form-select form-control-custom" required>
+                                    <option th:each="u : ${listaUsuarios}"
+                                        th:value="${u.id}"
+                                        th:text="${u.nome + ' - ' + u.email}"
+                                        th:selected="${u.id == emprestimo.usuario.id}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="dataEmprestimo">Data de Empréstimo:</label>
+                            <div class="col-md-10">
+                                <input type="date" id="dataEmprestimo" th:field="*{dataEmprestimo}" class="form-control form-control-custom" required/>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="dataPrevistaDevolucao">Data Prevista Devolução:</label>
+                            <div class="col-md-10">
+                                <input type="date" id="dataPrevistaDevolucao" th:field="*{dataPrevistaDevolucao}"
+                                    class="form-control form-control-custom" required/>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="dataDevolucao">Data de Devolução:</label>
+                            <div class="col-md-10">
+                                <input type="date" id="dataDevolucao" th:field="*{dataDevolucao}" class="form-control form-control-custom" />
+                                <small class="form-text text-muted">Preencha ao finalizar o empréstimo.</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3 row align-items-center">
+                            <label class="col-md-2 col-form-label form-label-custom">Situação:</label>
+                            <div class="col-md-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{status}" value="true" id="statusEmDia" /> 
+                                    <label class="form-check-label" for="statusEmDia">Em dia</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{status}" value="false" id="statusAtrasado" /> 
+                                    <label class="form-check-label" for="statusAtrasado">Atrasado</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row align-items-center">
+                            <label class="col-md-2 col-form-label form-label-custom">Renovado?</label>
+                            <div class="col-md-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{renovado}" value="true" id="renovadoSim" /> 
+                                    <label class="form-check-label" for="renovadoSim">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{renovado}" value="false" id="renovadoNao" /> 
+                                    <label class="form-check-label" for="renovadoNao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="observacoes">Observações:</label>
+                            <div class="col-md-10">
+                                <textarea id="observacoes" th:field="*{observacoes}" class="form-control form-control-custom" rows="3" 
+                                    placeholder="Notas sobre a condição do livro ou do empréstimo."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-start gap-3 mt-4">
+                            <button type="submit" class="btn custom-btn-primary btn-warning-custom col-auto">
+                                <i class="fas fa-save me-2"></i> Salvar Alterações
+                            </button>
+                            
+                            <a th:href="@{/emprestimo}" class="btn btn-outline-secondary col-auto custom-btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i> Voltar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>

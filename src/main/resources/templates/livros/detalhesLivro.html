@@ -9,79 +9,86 @@
     <div id="wrapper">
         <div th:replace="fragments/dashboard :: sidebar"></div>
         <div id="page-content-wrapper">
-            <div class="container-fluid pt-5">
+            <div class="container-fluid p-4">
+                
+                <h1 class="page-title mb-4" th:text="${livro.titulo}">Detalhes do Livro</h1>
+
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="panel panel-default">
-                            <div class="panel-body text-center" style="min-height: 400px; background-color: #f5f5f5; display: flex; align-items: center; justify-content: center;">
+                    <div class="col-md-4 mb-4">
+                        <div class="card custom-cover-card shadow-sm h-100">
+                            <div class="card-body d-flex align-items-center justify-content-center p-3">
                                 <img th:if="${livro.imagemUrl != null and !livro.imagemUrl.isEmpty()}" 
-                                     th:src="${livro.imagemUrl}" 
-                                     th:alt="${livro.titulo}" 
-                                     style="max-width: 100%; max-height: 400px;"
-                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"/>
-                                <div style="display: none; text-align: center;">
-                                    <i class="fa fa-book" style="font-size: 100px; color: #ccc;"></i>
-                                    <p style="color: #999; margin-top: 20px;">Imagem não disponível</p>
-                                </div>
-                                <div th:if="${livro.imagemUrl == null or livro.imagemUrl.isEmpty()}" style="text-align: center;">
-                                    <i class="fa fa-book" style="font-size: 100px; color: #ccc;"></i>
-                                    <p style="color: #999; margin-top: 20px;">Sem imagem</p>
+                                    th:src="${livro.imagemUrl}" 
+                                    th:alt="${livro.titulo}" 
+                                    class="img-fluid book-cover-img"
+                                    onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"/>
+                                    
+                                <div th:if="${livro.imagemUrl == null or livro.imagemUrl.isEmpty()}" 
+                                     class="text-center w-100 fallback-cover"
+                                     style="display: block;">
+                                    <i class="fas fa-book-open fa-5x text-secondary"></i>
+                                    <p class="text-muted mt-3">Capa não disponível</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-md-8">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="info">Informações</h4>
+                        
+                        <div class="card mb-4 custom-info-card shadow-sm">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0 text-white"><i class="fas fa-info-circle me-2"></i> Informações do Livro</h5>
                             </div>
-                            <div class="panel-body">
-                                <p style="color: #000;"><strong>Autor(es):</strong>
+                            <div class="card-body">
+                                
+                                <p class="detail-item"><strong>Autor(es):</strong>
                                     <span th:if="${livro.autores != null and !livro.autores.isEmpty()}">
                                         <span th:each="la, iterStat : ${livro.autores}">
                                             <span th:text="${la.autor.nome}"></span>
                                             <span th:if="${!iterStat.last}">, </span>
                                         </span>
                                     </span>
-                                    <span th:if="${livro.autores == null or livro.autores.isEmpty()}">Nenhum autor cadastrado</span>
+                                    <span th:if="${livro.autores == null or livro.autores.isEmpty()}" class="text-muted">Nenhum autor cadastrado</span>
                                 </p>
-                                <p style="color: #000;"><strong>Editora:</strong> <span th:text="${livro.editora}">Editora Exemplo</span></p>
-                                <p style="color: #000;"><strong>ISBN:</strong> <span th:text="${livro.isbn}">978-8576082675</span></p>
-                                <p style="color: #000;"><strong>Localização:</strong> <span th:text="${livro.localizacao}">Setor A - Prateleira 12</span></p>
-                                <p style="color: #000;"><strong>Status:</strong> 
-                                    <span th:if="${livro.disponivel}" class="label label-success">Disponível</span>
-                                    <span th:unless="${livro.disponivel}" class="label label-danger">Indisponível</span>
+                                
+                                <p class="detail-item"><strong>Editora:</strong> <span th:text="${livro.editora}">Editora Exemplo</span></p>
+                                <p class="detail-item"><strong>ISBN:</strong> <span th:text="${livro.isbn}">978-8576082675</span></p>
+                                <p class="detail-item"><strong>Localização:</strong> <span th:text="${livro.localizacao}">Setor A - Prateleira 12</span></p>
+                                
+                                <p class="detail-item mb-0"><strong>Status:</strong> 
+                                    <span th:if="${livro.disponivel}" class="badge bg-success-light text-success p-2 ms-2">Disponível</span>
+                                    <span th:unless="${livro.disponivel}" class="badge bg-danger-light text-danger p-2 ms-2">Indisponível</span>
                                 </p>
                             </div>
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4>Descrição</h4>
+                        <div class="card mb-4 custom-info-card shadow-sm">
+                            <div class="card-header card-header-custom">
+                                <h5 class="mb-0 text-white"><i class="fas fa-align-left me-2"></i> Descrição Breve</h5>
                             </div>
-                            <div class="panel-body">
-                                <p style="color: #000;" th:text="${livro.descricao}"></p>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default" style="background-color: #000; color: #fff;">
-                            <div class="panel-body text-center">
-                                <a th:href="@{/emprestimo/cadastrarEmprestimo(id=${livro.id})}" class="btn btn-lg" style="background-color: #000; color: #fff; width: 100%; border: none;">
-                                    <strong>Registrar Emprestimo</strong>
-                                </a>
+                            <div class="card-body">
+                                <p class="detail-description" th:text="${livro.descricao}">Descrição detalhada do livro...</p>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}" class="btn btn-warning">
-                                    <i class="fa fa-edit"></i> Editar
-                                </a>
-                                <a th:href="@{/livros}" class="btn btn-primary">
-                                    <i class="fa fa-arrow-left"></i> Voltar
-                                </a>
-                            </div>
+                        <div class="d-flex flex-wrap gap-3 mt-4">
+                            
+                            <a th:href="@{/emprestimo/cadastrarEmprestimo(id=${livro.id})}" 
+                                class="btn custom-btn-action-primary col-12 col-sm-auto">
+                                <i class="fas fa-handshake me-2"></i> Registrar Empréstimo
+                            </a>
+                            
+                            <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}" 
+                                class="btn custom-btn-action-secondary col-sm-auto btn-warning-custom">
+                                <i class="fas fa-edit me-2"></i> Editar Livro
+                            </a>
+                            
+                            <a th:href="@{/livros}" 
+                                class="btn custom-btn-action-secondary col-sm-auto">
+                                <i class="fas fa-arrow-left me-2"></i> Voltar à Lista
+                            </a>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -91,5 +98,4 @@
     <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
 </body>
-
 </html>

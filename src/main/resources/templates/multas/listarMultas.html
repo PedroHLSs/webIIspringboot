@@ -9,50 +9,63 @@
         <div th:replace="fragments/dashboard :: sidebar"></div>
 
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Listagem de Multas</h1>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Usuário</th>
-                            <th scope="col">Livro</th>
-                            <th scope="col">Valor</th>
-                            <th scope="col">Data da Multa</th>
-                            <th scope="col">Motivo</th>
-                            <th scope="col">Situação</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="multa : ${listaMultas}">
-                            <td th:text="${multa.usuario != null ? multa.usuario.nome : '—'}"></td>
-                            <td th:text="${multa.emprestimo != null ? multa.emprestimo.livro.titulo : '—'}"></td>
-                            <td th:text="${'R$ ' + #numbers.formatDecimal(multa.valor, 1, 2)}"></td>
-                            <td th:text="${multa.dataMulta}"></td>
-                            <td th:text="${multa.motivo != null ? multa.motivo : '—'}"></td>
-                            <td>
-                                <span th:if="${multa.paga} == false" class="label label-danger">Pendente</span>
-                                <span th:if="${multa.paga} == true" class="label label-success">Paga</span>
-                            </td>
-                            <td>
-                                <a th:href="@{/multas/editarMulta/{id}(id=${multa.id})}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-edit"></i> Editar
-                                </a>
-                                <a th:href="@{/multas/deletarMulta/{id}(id=${multa.id})}" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i> Excluir
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="row">
-                    <a th:href="@{/multas/cadastrarMulta}">
-                        <button class="btn btn-primary">
-                            <i class="fa fa-plus"></i> Cadastrar Multa
-                        </button>
-                    </a>
+            <div class="container-fluid p-4">
+                <h1 class="page-title mb-4">Listagem de Multas</h1>
+                
+                <div class="table-responsive custom-table-container shadow-sm">
+                    <table class="table table-hover align-middle custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Usuário</th>
+                                <th scope="col">Livro</th>
+                                <th scope="col" class="text-end">Valor (R$)</th>
+                                <th scope="col">Data Multa</th>
+                                <th scope="col">Motivo</th>
+                                <th scope="col" class="text-center">Situação</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="multa : ${listaMultas}">
+                                <td th:text="${multa.id}"></td>
+                                <td th:text="${multa.usuario != null ? multa.usuario.nome : '—'}"></td>
+                                <td th:text="${multa.emprestimo != null ? multa.emprestimo.livro.titulo : '—'}"></td>
+                                
+                                <td class="text-end" th:text="${'R$ ' + #numbers.formatDecimal(multa.valor, 1, 2, 'POINT')}"></td>
+                                
+                                <td th:text="${multa.dataMulta}"></td>
+                                
+                                <td th:text="${multa.motivo != null ? multa.motivo : '—'}"></td>
+                                
+                                <td class="text-center">
+                                    <span th:if="${multa.paga} == false" class="badge bg-danger">Pendente</span>
+                                    <span th:if="${multa.paga} == true" class="badge bg-success">Paga</span>
+                                </td>
+                                
+                                <td class="text-center text-nowrap">
+                                    <a th:href="@{/multas/editarMulta/{id}(id=${multa.id})}" 
+                                        class="btn btn-sm btn-action btn-warning" title="Editar">
+                                        <i class="fas fa-edit"></i> 
+                                    </a>
+                                    <a th:href="@{/multas/deletarMulta/{id}(id=${multa.id})}" 
+                                        class="btn btn-sm btn-action btn-danger" 
+                                        onclick="return confirm('Tem certeza que deseja excluir esta multa?');"
+                                        title="Deletar">
+                                        <i class="fas fa-trash-alt"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <a th:href="@{/multas/cadastrarMulta}" class="btn custom-btn-primary">
+                            <i class="fas fa-plus me-2"></i> Cadastrar Nova Multa
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

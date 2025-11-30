@@ -9,50 +9,61 @@
         <div th:replace="fragments/dashboard :: sidebar"></div>
 
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Listagem de Empréstimos</h1>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Livro</th>
-                            <th scope="col">Usuário</th>
-                            <th scope="col">Data Empréstimo</th>
-                            <th scope="col">Data Prevista</th>
-                            <th scope="col">Data Devolução</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="emprestimo : ${listaEmprestimos}">
-                            <td th:text="${emprestimo.livro != null ? emprestimo.livro.titulo : '—'}"></td>
-                            <td th:text="${emprestimo.usuario != null ? emprestimo.usuario.nome : '—'}"></td>
-                            <td th:text="${emprestimo.dataEmprestimo}"></td>
-                            <td th:text="${emprestimo.dataPrevistaDevolucao}"></td>
-                            <td th:text="${emprestimo.dataDevolucao}"></td>
-                            <td>
-                                <span th:if="${emprestimo.status} == true" class="label label-success">Em dia</span>
-                                <span th:if="${emprestimo.status} == false" class="label label-danger">Atrasado</span>
-                            </td>
-                            <td>
-                                <a th:href="@{/emprestimo/editarEmprestimo/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-edit"></i> Editar
-                                </a>
-                                <a th:href="@{/emprestimo/deletarEmprestimo/{id}(id=${emprestimo.id})}" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i> Excluir
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="row">
-                    <a th:href="@{/emprestimo/cadastrarEmprestimo}">
-                        <button class="btn btn-primary">
-                            <i class="fa fa-plus"></i> Cadastrar Empréstimo
-                        </button>
-                    </a>
+            <div class="container-fluid p-4">
+                <h1 class="page-title mb-4">Listagem de Empréstimos</h1>
+                
+                <div class="table-responsive custom-table-container shadow-sm">
+                    <table class="table table-hover align-middle custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Livro</th>
+                                <th scope="col">Usuário</th>
+                                <th scope="col">Empréstimo</th>
+                                <th scope="col">Previsto</th>
+                                <th scope="col">Devolução</th>
+                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="emprestimo : ${listaEmprestimos}">
+                                <td th:text="${emprestimo.id}"></td>
+                                <td th:text="${emprestimo.livro != null ? emprestimo.livro.titulo : '—'}"></td>
+                                <td th:text="${emprestimo.usuario != null ? emprestimo.usuario.nome : '—'}"></td>
+                                
+                                <td th:text="${emprestimo.dataEmprestimo}"></td>
+                                <td th:text="${emprestimo.dataPrevistaDevolucao}"></td>
+                                <td th:text="${emprestimo.dataDevolucao != null ? emprestimo.dataDevolucao : '—'}"></td>
+                                
+                                <td class="text-center">
+                                    <span th:if="${emprestimo.status} == true" class="badge bg-success">Em dia</span>
+                                    <span th:if="${emprestimo.status} == false" class="badge bg-danger">Atrasado</span>
+                                </td>
+                                
+                                <td class="text-center text-nowrap">
+                                    <a th:href="@{/emprestimo/editarEmprestimo/{id}(id=${emprestimo.id})}" 
+                                        class="btn btn-sm btn-action btn-warning" title="Editar">
+                                        <i class="fas fa-edit"></i> 
+                                    </a>
+                                    <a th:href="@{/emprestimo/deletarEmprestimo/{id}(id=${emprestimo.id})}" 
+                                        class="btn btn-sm btn-action btn-danger" 
+                                        onclick="return confirm('Tem certeza que deseja excluir este empréstimo?');"
+                                        title="Deletar">
+                                        <i class="fas fa-trash-alt"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <a th:href="@{/emprestimo/cadastrarEmprestimo}" class="btn custom-btn-primary">
+                            <i class="fas fa-plus me-2"></i> Cadastrar Novo Empréstimo
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

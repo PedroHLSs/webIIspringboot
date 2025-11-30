@@ -9,61 +9,65 @@
         <div th:replace="fragments/dashboard :: sidebar"></div>
 
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Listagem de Livros</h1>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">ISBN</th>
-                            <th scope="col">Editora</th>
-                            <th scope="col">Localização</th>
-                            <th scope="col">Disponivel</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="livro : ${listaLivros}">
-                            <td scope="row" th:text="${livro.titulo}"></td>
-                            <td scope="row">
-                                <span th:if="${livro.autores != null and !livro.autores.isEmpty()}">
-                                    <span th:each="la, iterStat : ${livro.autores}">
-                                        <span th:text="${la.autor.nome}"></span>
-                                        <span th:if="${!iterStat.last}">, </span>
+            <div class="container-fluid p-4"> <h1 class="page-title mb-4">Listagem de Livros</h1> 
+                
+                <div class="table-responsive custom-table-container shadow-sm">
+                    <table class="table table-hover align-middle custom-table"> 
+                        <thead>
+                            <tr>
+                                <th scope="col">Título</th>
+                                <th scope="col">Autor(es)</th>
+                                <th scope="col">ISBN</th>
+                                <th scope="col">Editora</th>
+                                <th scope="col">Localização</th>
+                                <th scope="col" class="text-center">Disponível</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="livro : ${listaLivros}">
+                                <td th:text="${livro.titulo}"></td>
+                                <td>
+                                    <span th:if="${livro.autores != null and !livro.autores.isEmpty()}">
+                                        <span th:each="la, iterStat : ${livro.autores}">
+                                            <span th:text="${la.autor.nome}"></span>
+                                            <span th:if="${!iterStat.last}">, </span>
+                                        </span>
                                     </span>
-                                </span>
-                                <span th:if="${livro.autores == null or livro.autores.isEmpty()}">—</span>
-                            </td>
-                            <td scope="row" th:text="${livro.isbn}"></td>
-                            <td scope="row" th:text="${livro.editora}"></td>
-                            <td scope="row" th:text="${livro.localizacao}"></td>
-                            <td scope="row">
-                                <span th:if="${livro.disponivel}" class="label label-success">Disponível</span>
-                                <span th:unless="${livro.disponivel}" class="label label-danger">Indisponível</span>
-                            </td>
-                            <td>
-                                <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-edit"></i> Editar
-                                </a>
-                                <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i> Deletar
-                                </a>
-                                <a th:href="@{/livros/detalhesLivro/{id}(id=${livro.id})}"
-                                    class="btn btn-sm btn-primary">
-                                    <i class="fa fa-eye"></i> Detalhes
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <a th:href="@{/livros/cadastrarLivro}">
-                        <button class="btn btn-primary">
-                            <i class="fa fa-plus"></i> Cadastrar Livro
-                        </button>
-                    </a>
+                                    <span th:if="${livro.autores == null or livro.autores.isEmpty()}">—</span>
+                                </td>
+                                <td th:text="${livro.isbn}"></td>
+                                <td th:text="${livro.editora}"></td>
+                                <td th:text="${livro.localizacao}"></td>
+                                <td class="text-center">
+                                    <span th:if="${livro.disponivel}" class="badge bg-success-light text-success p-2">Disponível</span>
+                                    <span th:unless="${livro.disponivel}" class="badge bg-danger-light text-danger p-2">Indisponível</span>
+                                </td>
+                                <td class="text-center text-nowrap">
+                                    <a th:href="@{/livros/editarLivro/{id}(id=${livro.id})}" 
+                                        class="btn btn-sm btn-action btn-warning" title="Editar">
+                                        <i class="fas fa-edit"></i> 
+                                    </a>
+                                    <a th:href="@{/livros/deletarLivro/{id}(id=${livro.id})}" 
+                                        class="btn btn-sm btn-action btn-danger" title="Deletar">
+                                        <i class="fas fa-trash-alt"></i> 
+                                    </a>
+                                    <a th:href="@{/livros/detalhesLivro/{id}(id=${livro.id})}"
+                                        class="btn btn-sm btn-action btn-info" title="Detalhes">
+                                        <i class="fas fa-eye"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <a th:href="@{/livros/cadastrarLivro}" class="btn custom-btn-primary">
+                            <i class="fas fa-plus me-2"></i> Cadastrar Novo Livro
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

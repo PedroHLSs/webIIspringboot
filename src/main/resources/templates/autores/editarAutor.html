@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
-
 <head th:replace="fragments/head :: head('Editar Autor')">
 </head>
 
@@ -9,31 +8,44 @@
     <div id="wrapper">
         <div th:replace="fragments/dashboard :: sidebar"></div>
         <div id="page-content-wrapper">
-            <div class="container-fluid pt-5">
-                <h1 class="titulo">Editar Autor</h1>
-                <form action="#" th:action="@{/autores/salvarAutor}" th:object="${autor}" method="POST">
-                    <input type="hidden" th:field="*{id}" />
-                    <div class="form-group row">
-                        <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
-                        <div class="col-sm-10">
-                            <input type="text" th:field="*{nome}" class="form-control" id="nome" name="nome"
-                                placeholder="Digite o nome do autor" required>
+            <div class="container-fluid p-4">
+                
+                <h1 class="page-title mb-4"><i class="fas fa-user-edit me-2"></i> Editar Autor: <span class="text-secondary" th:text="${autor.nome}"></span></h1>
+                
+                <div class="p-4 custom-form-card shadow-lg">
+                    <form action="#" th:action="@{/autores/salvarAutor}" th:object="${autor}" method="POST">
+                        
+                        <input type="hidden" th:field="*{id}" />
+                        
+                        <div class="mb-3 row">
+                            <label for="nome" class="col-md-2 col-form-label form-label-custom">Nome:</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{nome}" class="form-control form-control-custom" id="nome" name="nome"
+                                    placeholder="Digite o nome completo do autor" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="nacionalidade">Nacionalidade:</label>
-                        <div class="col-sm-10">
-                            <input type="text" id="nacionalidade" th:field="*{nacionalidade}" class="form-control" name="nacionalidade"
-                                placeholder="Qual a nacionalidade do autor?">
+                        
+                        <div class="mb-4 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="nacionalidade">Nacionalidade:</label>
+                            <div class="col-md-10">
+                                <input type="text" id="nacionalidade" th:field="*{nacionalidade}" class="form-control form-control-custom" name="nacionalidade"
+                                    placeholder="Ex: Brasileiro, Inglês, etc.">
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-warning col-2" id="botaoEditar">
-                        <i class="fa fa-save"></i> Salvar Alterações
-                    </button>
-                    <a th:href="@{/autores}" class="btn btn-default col-2">
-                        <i class="fa fa-arrow-left"></i> Voltar
-                    </a>
-                </form>
+                        
+                        <div class="d-flex justify-content-start gap-3 mt-4">
+                            <button type="submit" class="btn custom-btn-primary btn-warning-custom col-auto" id="botaoEditar">
+                                <i class="fas fa-save me-2"></i> Salvar Alterações
+                            </button>
+                            
+                            <a th:href="@{/autores}" class="btn btn-outline-secondary col-auto custom-btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i> Voltar
+                            </a>
+                        </div>
+                        
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head :: head('Cadastrar Livro')">
 </head>
@@ -9,95 +8,110 @@
     <div id="wrapper">
         <div th:replace="fragments/dashboard :: sidebar"></div>
         <div id="page-content-wrapper">
-            <div class="container-fluid pt-5">
-                <h1 class="titulo">Cadastrar Livro</h1>
-                <form action="#" th:action="@{/livros/salvarLivro}" th:object="${livro}" method="POST">
-                    <div class="form-group row">
-                        <label for="titulo" class="col-sm-2 col-form-label">Titulo:</label>
-                        <div class="col-sm-10">
-                            <input type="text" th:field="*{titulo}" class="form-control" id="titulo" name="titulo"
-                                placeholder="Digite o titulo do livro" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="autoresIds">Autores:</label>
-                        <div class="col-sm-10">
-                            <select name="autoresIds" id="autoresIds" class="form-control" multiple required size="5">
-                                <option th:each="a : ${listaAutores}" th:value="${a.id}" th:text="${a.nome}">Nome do
-                                    Autor</option>
-                            </select>
-                            <small class="form-text text-muted">Segure Ctrl (ou Cmd no Mac) para selecionar múltiplos
-                                autores</small>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="isbn">ISBN:</label>
-                        <div class="col-sm-10">
-                            <input type="text" th:field="*{isbn}" class="form-control" id="isbn" name="isbn"
-                                placeholder="Digite o ISBN do livro (ex: 978-8576082675)">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="ano">Ano:</label>
-                        <div class="col-sm-10">
-                            <input type="date" th:field="*{ano}" class="form-control" id="ano" name="ano"
-                                placeholder="Digite o ano do livro">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="editora">Editora:</label>
-                        <div class="col-sm-10">
-                            <input type="text" th:field="*{editora}" class="form-control" id="editora" name="editora"
-                                placeholder="Qual a editora do livro?">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="localizacao">Localização:</label>
-                        <div class="col-sm-10">
-                            <input type="text" th:field="*{localizacao}" class="form-control" id="localizacao"
-                                name="localizacao" placeholder="Ex: Setor A - Prateleira 12">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="imagemUrl">URL da Imagem:</label>
-                        <div class="col-sm-10">
-                            <input type="text" th:field="*{imagemUrl}" class="form-control" id="imagemUrl"
-                                name="imagemUrl" placeholder="Cole a URL da imagem do livro">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="disponivel">Disponivel?:</label>
-                        <div class="col-sm-10">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" th:field="*{disponivel}" value="true"
-                                    id="disponivelSim" checked>
-                                <label class="form-check-label" for="disponivelSim">Sim</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" th:field="*{disponivel}" value="false"
-                                    id="disponivelNao">
-                                <label class="form-check-label" for="disponivelNao">Não</label>
+            <div class="container-fluid p-4">      
+                <h1 class="page-title mb-4">Cadastrar Livro</h1>
+                
+                <div class="p-4 custom-form-card shadow-lg">
+                    <form action="#" th:action="@{/livros/salvarLivro}" th:object="${livro}" method="POST">
+                        
+                        <div class="mb-3 row">
+                            <label for="titulo" class="col-md-2 col-form-label form-label-custom">Título:</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{titulo}" class="form-control form-control-custom" id="titulo" name="titulo"
+                                    placeholder="Digite o título do livro" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="descricao">Descrição breve do livro:</label>
-                        <div class="col-sm-10">
-                            <textarea th:field="*{descricao}" class="form-control" id="descricao" name="descricao"
-                                placeholder="Qual a descricao do livro?" rows="4" cols="50"></textarea>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="autoresIds">Autores:</label>
+                            <div class="col-md-10">
+                                <select name="autoresIds" id="autoresIds" class="form-select form-control-custom" multiple required size="5">
+                                    <option th:each="a : ${listaAutores}" th:value="${a.id}" th:text="${a.nome}">Nome do Autor</option>
+                                </select>
+                                <small class="form-text text-muted">
+                                    <i class="fas fa-info-circle me-1"></i> Segure **Ctrl** (ou **Cmd** no Mac) para selecionar múltiplos autores.
+                                </small>
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-info col-2" id="botaoCadastro">
-                        <i class="fa fa-save"></i> Cadastrar Livro
-                    </button>
-                    <a th:href="@{/livros}" class="btn btn-default col-2">
-                        <i class="fa fa-arrow-left"></i> Voltar
-                    </a>
-                </form>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="isbn">ISBN:</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{isbn}" class="form-control form-control-custom" id="isbn" name="isbn"
+                                    placeholder="Digite o ISBN do livro (ex: 978-8576082675)">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="ano">Data de Publicação:</label>
+                            <div class="col-md-10">
+                                <input type="date" th:field="*{ano}" class="form-control form-control-custom" id="ano" name="ano"
+                                    placeholder="Digite o ano do livro">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="editora">Editora:</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{editora}" class="form-control form-control-custom" id="editora" name="editora"
+                                    placeholder="Qual a editora do livro?">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="localizacao">Localização:</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{localizacao}" class="form-control form-control-custom" id="localizacao"
+                                    name="localizacao" placeholder="Ex: Setor A - Prateleira 12">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="imagemUrl">URL da Capa:</label>
+                            <div class="col-md-10">
+                                <input type="text" th:field="*{imagemUrl}" class="form-control form-control-custom" id="imagemUrl"
+                                    name="imagemUrl" placeholder="Cole a URL da imagem de capa do livro">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3 row align-items-center">
+                            <label class="col-md-2 col-form-label form-label-custom">Disponível:</label>
+                            <div class="col-md-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{disponivel}" value="true"
+                                        id="disponivelSim" checked>
+                                    <label class="form-check-label" for="disponivelSim">Sim</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{disponivel}" value="false"
+                                        id="disponivelNao">
+                                    <label class="form-check-label" for="disponivelNao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="descricao">Descrição Breve:</label>
+                            <div class="col-md-10">
+                                <textarea th:field="*{descricao}" class="form-control form-control-custom" id="descricao" name="descricao"
+                                    placeholder="Qual a descrição breve do livro?" rows="4"></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="d-flex justify-content-start gap-3 mt-4">
+                            <button type="submit" class="btn custom-btn-primary col-auto">
+                                <i class="fas fa-save me-2"></i> Salvar Livro
+                            </button>
+                            <a th:href="@{/livros}" class="btn btn-outline-secondary col-auto custom-btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i> Voltar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>
-    <div th:replace="fragments/dashboard :: dashboard-scripts"></div>
     <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
 </body>
 

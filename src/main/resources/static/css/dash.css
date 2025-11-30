@@ -1,158 +1,352 @@
- 
-
-.nav-pills > li > a {
-   border-radius: 0;
-}
-
+/* Estilos globais para o layout do Dashboard (Wrapper) */
 #wrapper {
-   padding-left: 0;
-   -webkit-transition: all 0.5s ease;
-   -moz-transition: all 0.5s ease;
-   -o-transition: all 0.5s ease;
-   transition: all 0.5s ease;
-   overflow: hidden;
+    display: flex; /* Garante que a sidebar e o conteúdo principal fiquem lado a lado */
+    min-height: 100vh;
 }
 
-#wrapper.toggled {
-   padding-left: 250px;
-   overflow: hidden;
-}
-
+/* Estilo da Barra Lateral (Sidebar) */
 #sidebar-wrapper {
-   z-index: 1000;
-   position: absolute;
-   left: 250px;
-   width: 0;
-   height: 100%;
-   margin-left: -250px;
-   overflow-y: auto;
-   background: #000;
-   -webkit-transition: all 0.5s ease;
-   -moz-transition: all 0.5s ease;
-   -o-transition: all 0.5s ease;
-   transition: all 0.5s ease;
+    /* Cores principais da sua aplicação */
+    background-color: #017DC5; 
+    border-right: 2px solid #015383; /* Borda escura semelhante ao footer/header */
+    width: 250px;
+    flex-shrink: 0; /* Impede que encolha */
+    position: sticky;
+    top: 0;
+    height: 100vh; /* Ocupa a altura total da viewport */
+    padding-top: 20px;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-   width: 250px;
+/* Título do Header da Sidebar */
+.sidebar-header h5 {
+    color: #fff;
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 15px;
 }
 
+/* Estilo dos links de navegação */
+.sidebar-nav .nav-link {
+    color: rgba(255, 255, 255, 0.85); /* Branco mais suave */
+    padding: 15px 20px;
+    font-size: 1.05rem;
+    transition: background-color 0.3s, color 0.3s;
+    border-left: 4px solid transparent; /* Para o efeito de destaque ativo */
+}
+
+/* Efeito Hover nos links */
+.sidebar-nav .nav-link:hover {
+    color: white;
+    background-color: #03658C; /* Um azul um pouco mais escuro para o hover */
+}
+
+/* Destaque para o link ativo */
+.sidebar-nav .nav-link.active {
+    color: white;
+    background-color: #03658C; /* Azul de destaque */
+    border-left-color: #f0f8ff; /* Cor clara para a borda de destaque (como um acento) */
+    font-weight: bold;
+}
+
+/* Estilo dos ícones */
+.sidebar-nav .nav-link i {
+    width: 20px; /* Garante que os ícones fiquem alinhados */
+    text-align: center;
+}
+
+/* Estilo do Conteúdo Principal */
 #page-content-wrapper {
-   position: absolute;
-   padding: 15px;
-   width: 100%;
-   overflow-x: hidden;
+    width: 100%;
+    padding: 20px;
+    background-color: #f0f8ff; /* Fundo claro para o conteúdo */
 }
 
-.xyz {
-   min-width: 360px;
+/* Botão de Sair no Rodapé da Sidebar */
+.custom-sidebar .btn-outline-light {
+    border-radius: 20px; /* Botão arredondado como no seu site principal */
+    border-color: rgba(255, 255, 255, 0.7);
+    color: white;
 }
 
-#wrapper.toggled #page-content-wrapper {
-   position: relative;
-   margin-right: 0px;
+.custom-sidebar .btn-outline-light:hover {
+    background-color: white;
+    color: #017DC5;
 }
 
-.fixed-brand {
-   width: auto;
-}
-/* Sidebar Styles */
+/* --- Estilos da Página de Listagem de Livros --- */
 
-.sidebar-nav {
-   position: absolute;
-   top: 0;
-   width: 250px;
-   margin: 0;
-   padding: 0;
-   list-style: none;
-   margin-top: 2px;
+/* Título da Página */
+.page-title {
+    color: #03658C; /* Cor de destaque escura da sua aplicação */
+    font-weight: 700;
+    border-bottom: 2px solid #017DC5; /* Linha de destaque azul */
+    padding-bottom: 10px;
 }
 
-.sidebar-nav li {
-   text-indent: 15px;
-   line-height: 40px;
+/* Container da Tabela */
+.custom-table-container {
+    background-color: white;
+    border-radius: 10px;
+    overflow-x: auto; /* Garante que a tabela seja responsiva */
+    border: 1px solid #ccc;
 }
 
-.sidebar-nav li a {
-   display: block;
-   text-decoration: none;
-   color: #999999;
+/* Estilo da Tabela */
+.custom-table {
+    margin-bottom: 0; /* Remove margem inferior da tabela dentro do container */
 }
 
-.sidebar-nav li a:hover {
-   text-decoration: none;
-   color: #fff;
-   background: rgba(255, 255, 255, 0.2);
-   border-left: red 2px solid;
+/* Cabeçalho da Tabela */
+.custom-table thead th {
+    background-color: #017DC5; /* Azul principal do header */
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    border-bottom: none;
+    padding: 1rem;
 }
 
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-   text-decoration: none;
+/* Linhas da Tabela (Fundo listrado/hover) */
+.custom-table tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa; /* Cinza claro para linhas ímpares */
+}
+.custom-table tbody tr:hover {
+    background-color: #e9ecef; /* Um cinza um pouco mais escuro no hover */
 }
 
-.sidebar-nav > .sidebar-brand {
-   height: 65px;
-   font-size: 18px;
-   line-height: 60px;
+/* Status: Disponível (Cores mais suaves para o badge) */
+.bg-success-light {
+    background-color: #d1e7dd !important; /* Verde claro */
+    color: #0f5132 !important; /* Verde escuro */
+    font-weight: 600;
+    border-radius: 8px;
+}
+/* Status: Indisponível (Cores mais suaves para o badge) */
+.bg-danger-light {
+    background-color: #f8d7da !important; /* Vermelho claro */
+    color: #842029 !important; /* Vermelho escuro */
+    font-weight: 600;
+    border-radius: 8px;
 }
 
-.sidebar-nav > .sidebar-brand a {
-   color: #999999;
+/* Estilo dos Botões de Ação (Editar, Deletar, Detalhes) */
+.btn-action {
+    border-radius: 8px; /* Arredondamento suave */
+    padding: 5px 8px;
+    margin: 2px;
+    color: white; /* Garante que o ícone e texto sejam brancos */
+    font-size: 0.9rem;
+}
+/* Cores para os botões de Ação */
+.btn-warning {
+    background-color: #ffc107; /* Amarelo */
+    border-color: #ffc107;
+}
+.btn-danger {
+    background-color: #dc3545; /* Vermelho */
+    border-color: #dc3545;
+}
+.btn-info {
+    background-color: #0dcaf0; /* Ciano/Info */
+    border-color: #0dcaf0;
 }
 
-.sidebar-nav > .sidebar-brand a:hover {
-   color: #fff;
-   background: none;
+
+/* Botão "Cadastrar Novo Livro" (Seguindo o padrão do projeto) */
+.custom-btn-primary {
+    /* Cores e estilos do botão principal do seu site/cadastro */
+    background-color: #0d6efd; 
+    border-color: #0d6efd;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
-.no-margin {
-   margin: 0;
+.custom-btn-primary:hover {
+    background-color: #017DC5; /* Azul escuro no hover */
+    border-color: #017DC5;
+    color: white;
+}
+/* --- Estilos da Página de Detalhes do Livro --- */
+
+/* Card Container */
+.custom-info-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
 }
 
-@media (min-width: 768px) {
-   #wrapper {
-      padding-left: 250px;
-   }
-   .fixed-brand {
-      width: 250px;
-   }
-   #wrapper.toggled {
-      padding-left: 0;
-   }
-   #sidebar-wrapper {
-      width: 250px;
-   }
-   #wrapper.toggled #sidebar-wrapper {
-      width: 250px;
-   }
-   #wrapper.toggled-2 #sidebar-wrapper {
-      width: 50px;
-   }
-   #wrapper.toggled-2 #sidebar-wrapper:hover {
-      width: 250px;
-   }
-   #page-content-wrapper {
-      padding: 20px;
-      position: relative;
-      -webkit-transition: all 0.5s ease;
-      -moz-transition: all 0.5s ease;
-      -o-transition: all 0.5s ease;
-      transition: all 0.5s ease;
-   }
-   #wrapper.toggled #page-content-wrapper {
-      position: relative;
-      margin-right: 0;
-      padding-left: 250px;
-   }
-   #wrapper.toggled-2 #page-content-wrapper {
-      position: relative;
-      margin-right: 0;
-      margin-left: -200px;
-      -webkit-transition: all 0.5s ease;
-      -moz-transition: all 0.5s ease;
-      -o-transition: all 0.5s ease;
-      transition: all 0.5s ease;
-      width: auto;
-   }
+/* Header do Card (Informações e Descrição) */
+.card-header-custom {
+    background-color: #017DC5; /* Azul principal */
+    color: white;
+    font-weight: 600;
+    border-radius: 9px 9px 0 0 !important; /* Arredondamento apenas nas bordas superiores */
+    padding: 0.75rem 1.25rem;
+}
+
+/* Itens de Detalhe */
+.detail-item {
+    font-size: 1.05rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.detail-item strong {
+    color: #03658C; /* Destaque azul escuro para o título */
+}
+
+/* Descrição */
+.detail-description {
+    line-height: 1.6;
+    color: #555;
+    white-space: pre-wrap; /* Mantém a formatação de nova linha, se houver */
+}
+
+/* Card da Capa do Livro */
+.custom-cover-card {
+    background-color: #f8f9fa; /* Fundo mais claro para a imagem */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.book-cover-img {
+    max-height: 400px; /* Limita a altura da imagem */
+    object-fit: contain; /* Garante que a imagem se ajuste sem cortar */
+    border-radius: 8px;
+}
+
+/* Botão Principal de Ação (Empréstimo) */
+.custom-btn-action-primary {
+    background-color: #03658C; /* Azul escuro para maior destaque */
+    border: 1px solid #03658C;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 10px 25px;
+    border-radius: 25px; /* Botão arredondado */
+    transition: background-color 0.3s, opacity 0.3s;
+}
+
+.custom-btn-action-primary:hover {
+    background-color: #017DC5; 
+    color: white;
+}
+
+/* Botões Secundários de Ação (Editar e Voltar) */
+.custom-btn-action-secondary {
+    border-radius: 25px;
+    padding: 8px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+/* Customização do Botão Editar (amarelo com estilo customizado) */
+.btn-warning-custom {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #333; /* Cor de texto mais escura para o amarelo */
+}
+.btn-warning-custom:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+    color: #333;
+}
+
+/* Customização do Botão Voltar (Azul Padrão) */
+.btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+/* --- Estilos do Formulário de Cadastro --- */
+
+/* Contêiner do Formulário (Card) */
+.custom-form-card {
+    background-color: white;
+    border: 1px solid #017DC5; /* Borda da cor principal */
+    border-radius: 10px;
+}
+
+/* Rótulos dos Campos (Labels) */
+.form-label-custom {
+    color: #03658C; /* Azul escuro, cor de texto primário do dashboard */
+    font-weight: 600;
+    text-align: right; /* Alinha o texto do label à direita (para telas maiores) */
+}
+
+@media (max-width: 767.98px) {
+    .form-label-custom {
+        text-align: left; /* Alinha à esquerda em telas pequenas */
+        margin-bottom: 5px;
+    }
+}
+
+/* Campos de Input e Select (Padrão) */
+.form-control-custom,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-control-custom:focus,
+.form-select:focus {
+    border-color: #399CD5; /* Azul claro no foco */
+    box-shadow: 0 0 0 0.25rem rgba(1, 125, 197, 0.25); /* Sombra suave da cor principal */
+}
+
+/* Botão Principal (Cadastrar/Salvar) - Reutilizando o estilo customizado */
+.custom-btn-primary {
+    /* Cores e estilos do botão principal do seu site/cadastro */
+    background-color: #0d6efd; 
+    border-color: #0d6efd;
+    color: white;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-size: 1.0rem;
+    font-weight: bold;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.custom-btn-primary:hover {
+    background-color: #017DC5; 
+    border-color: #017DC5;
+    color: white;
+}
+
+/* Botão Secundário (Voltar) */
+.custom-btn-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+    border-radius: 20px;
+    padding: 8px 25px;
+    font-size: 1.0rem;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.custom-btn-secondary:hover {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Customização do Botão Salvar Alterações (amarelo com estilo customizado) */
+.btn-warning-custom {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #333; /* Cor de texto mais escura para o amarelo */
+}
+.btn-warning-custom:hover {
+    background-color: #e0a800;
+    border-color: #e0a800;
+    color: #333;
 }

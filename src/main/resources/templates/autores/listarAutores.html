@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
-
 <head th:replace="fragments/head :: head('Listar Autores')">
 </head>
 
@@ -10,38 +9,47 @@
         <div th:replace="fragments/dashboard :: sidebar"></div>
 
         <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <h1>Listagem de Autores</h1>
-
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Nacionalidade</th>
-                            <th scope="col">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="autor : ${listaAutores}">
-                            <td scope="row" th:text="${autor.nome}"></td>
-                            <td scope="row" th:text="${autor.nacionalidade}"></td>
-                            <td>
-                                <a th:href="@{/autores/editarAutor/{id}(id=${autor.id})}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-edit"></i> Editar
-                                </a>
-                                <a th:href="@{/autores/deletarAutor/{id}(id=${autor.id})}" class="btn btn-sm btn-danger">
-                                    <i class="fa fa-trash"></i> Deletar
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="row">
-                    <a th:href="@{/autores/cadastrarAutor}">
-                        <button class="btn btn-primary">
-                            <i class="fa fa-plus"></i> Cadastrar Autor
-                        </button>
-                    </a>
+            <div class="container-fluid p-4">
+                <h1 class="page-title mb-4">Listagem de Autores</h1>
+                
+                <div class="table-responsive custom-table-container shadow-sm">
+                    <table class="table table-hover align-middle custom-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Nacionalidade</th>
+                                <th scope="col" class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="autor : ${listaAutores}">
+                                <td th:text="${autor.id}">1</td>
+                                <td th:text="${autor.nome}"></td>
+                                <td th:text="${autor.nacionalidade}"></td>
+                                <td class="text-center text-nowrap">
+                                    <a th:href="@{/autores/editarAutor/{id}(id=${autor.id})}"
+                                        class="btn btn-sm btn-action btn-warning" title="Editar">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a th:href="@{/autores/deletarAutor/{id}(id=${autor.id})}"
+                                        class="btn btn-sm btn-action btn-danger"
+                                        onclick="return confirm('ATENÇÃO: Deseja realmente excluir este autor? Isso pode afetar os livros associados.');"
+                                        title="Deletar">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <a th:href="@{/autores/cadastrarAutor}" class="btn custom-btn-primary">
+                            <i class="fas fa-plus me-2"></i> Cadastrar Novo Autor
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

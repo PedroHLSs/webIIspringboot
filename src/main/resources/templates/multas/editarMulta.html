@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/head :: head('Editar Multa')">
 </head>
@@ -8,81 +8,91 @@
     <div id="wrapper">
         <div th:replace="fragments/dashboard :: sidebar"></div>
         <div id="page-content-wrapper">
-            <div class="container-fluid pt-5">
-                <h1 class="titulo">Editar Multa</h1>
+            <div class="container-fluid p-4">
+                
+                <h1 class="page-title mb-4"><i class="fas fa-edit me-2"></i> Editar Multa: <span class="text-secondary" th:text="'#' + ${multa.id}"></span></h1>
 
-                <form th:action="@{/multas/salvarMulta}" th:object="${multa}" method="POST">
-                    <input type="hidden" th:field="*{id}" />
+                <div class="p-4 custom-form-card shadow-lg">
+                    <form th:action="@{/multas/salvarMulta}" th:object="${multa}" method="POST">
+                        
+                        <input type="hidden" th:field="*{id}" />
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-                    <!-- Empréstimo -->
-                    <div class="form-group row">
-                        <label for="emprestimo_id" class="col-sm-2 col-form-label">Empréstimo:</label>
-                        <div class="col-sm-10">
-                            <select th:field="*{emprestimo.id}" id="emprestimo_id" class="form-control" required>
-                                <option th:each="emp : ${listaEmprestimos}"
+                        <div class="mb-3 row">
+                            <label for="emprestimo_id" class="col-md-2 col-form-label form-label-custom">Empréstimo:</label>
+                            <div class="col-md-10">
+                                <select th:field="*{emprestimo.id}" id="emprestimo_id" class="form-select form-control-custom" required>
+                                    <option th:each="emp : ${listaEmprestimos}"
                                         th:value="${emp.id}"
-                                        th:text="${emp.livro.titulo + ' - ' + emp.usuario.nome}">Livro - Usuário</option>
-                            </select>
+                                        th:text="${emp.livro.titulo + ' - ' + emp.usuario.nome + ' (ID: ' + emp.id + ')'}"
+                                        th:selected="${emp.id == multa.emprestimo.id}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Usuário -->
-                    <div class="form-group row">
-                        <label for="usuario_id" class="col-sm-2 col-form-label">Usuário:</label>
-                        <div class="col-sm-10">
-                            <select th:field="*{usuario.id}" id="usuario_id" class="form-control" required>
-                                <option th:each="u : ${listaUsuarios}"
+                        <div class="mb-3 row">
+                            <label for="usuario_id" class="col-md-2 col-form-label form-label-custom">Usuário:</label>
+                            <div class="col-md-10">
+                                <select th:field="*{usuario.id}" id="usuario_id" class="form-select form-control-custom" required>
+                                    <option th:each="u : ${listaUsuarios}"
                                         th:value="${u.id}"
-                                        th:text="${u.nome + ' - ' + u.email}">Nome - Email</option>
-                            </select>
+                                        th:text="${u.nome + ' - ' + u.email}"
+                                        th:selected="${u.id == multa.usuario.id}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Valor -->
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="valor">Valor (R$):</label>
-                        <div class="col-sm-10">
-                            <input type="number" id="valor" th:field="*{valor}" class="form-control" step="0.01" min="0" required />
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="valor">Valor (R$):</label>
+                            <div class="col-md-10">
+                                <input type="number" id="valor" th:field="*{valor}" class="form-control form-control-custom" 
+                                    step="0.01" min="0" required />
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Data da Multa -->
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="dataMulta">Data da Multa:</label>
-                        <div class="col-sm-10">
-                            <input type="date" id="dataMulta" th:field="*{dataMulta}" class="form-control" required />
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="dataMulta">Data da Multa:</label>
+                            <div class="col-md-10">
+                                <input type="date" id="dataMulta" th:field="*{dataMulta}" class="form-control form-control-custom" required />
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Motivo -->
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label" for="motivo">Motivo:</label>
-                        <div class="col-sm-10">
-                            <textarea id="motivo" th:field="*{motivo}" class="form-control" rows="3"></textarea>
+                        <div class="mb-3 row">
+                            <label class="col-md-2 col-form-label form-label-custom" for="motivo">Motivo:</label>
+                            <div class="col-md-10">
+                                <textarea id="motivo" th:field="*{motivo}" class="form-control form-control-custom" rows="3" 
+                                    placeholder="Descreva a razão da multa (ex: Atraso de 5 dias)."></textarea>
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- Paga -->
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Situação:</label>
-                        <div class="col-sm-10">
-                            <label class="radio-inline">
-                                <input type="radio" th:field="*{paga}" value="false" /> Pendente
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" th:field="*{paga}" value="true" /> Paga
-                            </label>
+                        <div class="mb-4 row align-items-center">
+                            <label class="col-md-2 col-form-label form-label-custom">Situação:</label>
+                            <div class="col-md-10">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{paga}" value="false" id="pagaPendente" th:checked="${multa.paga == false}"/> 
+                                    <label class="form-check-label" for="pagaPendente">Pendente</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" th:field="*{paga}" value="true" id="pagaPaga" th:checked="${multa.paga == true}"/> 
+                                    <label class="form-check-label" for="pagaPaga">Paga</label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group row">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <button type="submit" class="btn btn-info"><i class="fa fa-save"></i> Salvar Alterações</button>
-                            <a th:href="@{/multas}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Voltar</a>
+                        <div class="d-flex justify-content-start gap-3 mt-4">
+                            <button type="submit" class="btn custom-btn-primary btn-warning-custom col-auto">
+                                <i class="fas fa-save me-2"></i> Salvar Alterações
+                            </button>
+                            
+                            <a th:href="@{/multas}" class="btn btn-outline-secondary col-auto custom-btn-secondary">
+                                <i class="fas fa-arrow-left me-2"></i> Voltar
+                            </a>
                         </div>
-                    </div>
-                </form>
-
+                    </form>
+                </div>
+                
             </div>
         </div>
     </div>
