@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
 
     @GetMapping("/fragments/dashboard")
-    public String dashboard() {
+    public String dashboardFragment() {
         return "fragments/dashboard";
     }
 }
